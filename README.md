@@ -1,127 +1,178 @@
-# Premium Routes Vayo Feature: README
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nepal Yatra README</title>
+  <style>
+    /* Basic styling for readability */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+      background-color: #ffffff;
+      color: #333333;
+    }
+    h1, h2, h3, h4 {
+      color: #222222;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    ul, ol {
+      margin-left: 20px;
+    }
+    a {
+      color: #1a0dab;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nepal Yatra</h1>
+  <p>
+    Nepal Yatra is a travel website designed to promote tourism in Nepal. It provides a comprehensive platform for travelers to explore various destinations, book tours, and get useful information about traveling in Nepal.
+  </p>
+  
+  <img src="./yatra.png" alt="Nepal Yatra">
 
-## Overview
-
-This document outlines the implementation details for the "Premium Routes Vayo" feature, which focuses on retrieving and managing premium hotel information. It covers cron job scheduling and validation, authentication routes, and the email notification system.
-
-## 1. Cron Job Scheduling and Validation
-
-### Purpose
-
-Cron jobs are used to automate tasks related to premium hotel data, such as:
-
-- **Data Refresh:** Regularly updating premium hotel information from external sources.
-- **Report Generation:** Generating daily/weekly reports on premium hotel availability and pricing.
-- **Maintenance Tasks:** Performing database maintenance tasks related to premium hotel data.
-
-### Scheduling Format
-
-We use the standard Unix cron string format ( `* * * * *` ) to define job schedules [6]. The five fields represent:
-
-| Field            | Format of valid values               |
-| ---------------- | ------------------------------------ |
-| Minute           | 0-59                                 |
-| Hour             | 0-23                                 |
-| Day of the month | 1-31                                 |
-| Month            | 1-12 (or JAN to DEC)                 |
-| Day of the week  | 0-6 (or SUN to SAT; or 7 for Sunday) |
-
-For example, `0 10 * * *` means the job will run at 10:00 AM every day.
-
-### Validation
-
-It is **crucial** to validate cron expressions to prevent scheduling errors [1]. We employ the following strategies:
-
-- **`cron-validator` Library:** We use the `cron-validator` npm package within our codebase to validate cron expressions before they are saved to the database or used in scheduling [2].
-
-  ```
-  npm install cron-validator
-  ```
-
-  Usage example:
-
-  ```
-  const cron = require('cron-validator');
-
-  if (cron.isValidCron('* * * * *')) {
-    // Schedule the job
-  } else {
-    // Handle the invalid cron expression error
-  }
-  ```
-
-  You can customize validation options, such as enabling seconds or alias support [2]:
-
-  ```
-  cron.isValidCron('* * * * * *', { seconds: true }); // Enable seconds
-  cron.isValidCron('* * * * mon', { alias: true });   // Enable aliases for months and weekdays
-  ```
-
-- **Online Validators:** We use online tools like Crontab Guru [1][7] ([https://crontab.guru](https://crontab.guru)) to visually confirm the schedule and ensure it matches our intentions.
-- **Testing:** After adding a cron job, monitor its execution to confirm it runs at the expected times.
-
-### Common Issues and Troubleshooting
-
-- **Incorrect Syntax:** Double-check the cron expression syntax. Use a validator to identify errors [1][2].
-- **Time Zones:** Ensure the server's time zone is correctly configured and that the `TZ` or `CRON_TZ` environment variables are not overriding the system time [1].
-- **Permissions:** Verify that the user running the cron job has the necessary permissions to execute the command or script [1]. Specifically, jobs in `/etc/cron.*/` must be owned by `root` [1].
-- **Escaping `%`:** If your command string contains a `%` character, escape it with a backslash ( `\%` ) [1].
-
-### Kubernetes CronJobs
-
-If deploying to Kubernetes, consider using Kubernetes CronJobs. Key configurations include:
-
-- **.spec.startingDeadlineSeconds:** Define a deadline for starting the Job. If the Job misses its scheduled time by more than this value, it will be skipped [3].
-
-## 2. Authentication Routes
-
-### Purpose
-
-Authentication routes protect the API endpoints used to manage premium hotel data. This ensures that only authorized users can create, update, or delete premium hotel information.
-
-### Routes
-
-The following authentication routes are implemented:
-
-- **/api/auth/register:** Registers a new user with administrative privileges.
-- **/api/auth/login:** Logs in an existing user and returns a JWT (JSON Web Token).
-- **/api/auth/protected:** (Middleware) A middleware function (`protectRoute`) verifies the JWT and allows access to protected routes.
-
-### Implementation Details
-
-- **JWT (JSON Web Tokens):** We use JWTs for authentication. Upon successful login, the server returns a JWT to the client. The client then includes this JWT in the `Authorization` header of subsequent requests.
-- **`protectRoute` Middleware:** This middleware is applied to all protected routes. It extracts the JWT from the `Authorization` header, verifies its signature, and checks if the token has expired. If the token is valid, the middleware attaches the user object to the request (`req.user`) and calls `next()`. Otherwise, it returns a 401 (Unauthorized) error.
-- **bcrypt:** We use `bcrypt` to hash and salt passwords before storing them in the database.
-- **Cookie Security:** The JWT is stored in an HTTP-only cookie with `Secure` attribute set to true in production and `SameSite` attribute set to strict or lax.
-
-### Security Considerations
-
-- **Strong Passwords:** Enforce strong password policies during registration.
-- **JWT Secret:** Store the JWT secret key (`SECRET_STRING`) securely as an environment variable. Rotate this secret periodically.
-- **HTTPS:** Always use HTTPS in production to protect against man-in-the-middle attacks.
-- **Input Validation:** Sanitize and validate all user inputs to prevent injection attacks.
-
-## 3. Mail System for Premium Hotel Notifications
-
-### Purpose
-
-The mail system sends email notifications related to premium hotels:
-
-- **Account Verification:** Sending OTPs (One-Time Passwords) to verify user email addresses during registration.
-- **Alerts:** Sending alerts when new premium hotels are added, when prices change significantly, or when availability is limited.
-- **Reports:** Sending scheduled reports on premium hotel data.
-
-### Implementation Details
-
-- **Nodemailer:** We use Nodemailer to send emails.
-- **Transporter Configuration:** The Nodemailer transporter is configured to use a dedicated email sending service (e.g., SendGrid, Mailgun, AWS SES) or Gmail with OAuth2 for better security and reliability.
-- **Email Templates:** We use email templates to generate consistent and visually appealing email messages.
-
-### Security Considerations
-
-- **Email Service:** Avoid using Gmail directly in production due to sending limits and security concerns. Use a dedicated email sending service.
-- **OAuth2:** Use OAuth2 authentication with Nodemailer for better security and to avoid the "less secure app" issue with Gmail.
-- **Input Sanitization:** Sanitize all data used in email content to prevent email injection attacks.
-- **Rate Limiting:** Implement rate limiting to prevent abuse of the email sending system.
-
-This `README.md` provides a comprehensive overview of the key components of the "Premium Routes Vayo" feature, emphasizing cron job management, authentication, and email notifications. Remember to adapt this template to your specific implementation details.
+  <h2>Features</h2>
+  
+  <h3>1. Tour Packages</h3>
+  <ul>
+    <li>A collection of travel packages that showcase various destinations in Nepal.</li>
+    <li>Detailed itineraries for each package to help users plan their trip.</li>
+  </ul>
+  
+  <h3>2. Booking System</h3>
+  <ul>
+    <li>Users can book travel packages directly from the website.</li>
+    <li>Provides a smooth and easy-to-use booking process.</li>
+  </ul>
+  
+  <h3>3. Travel Blog</h3>
+  <ul>
+    <li>Articles and guides on the best places to visit, local customs, and helpful travel tips.</li>
+  </ul>
+  
+  <h3>4. Contact &amp; Inquiry Form</h3>
+  <ul>
+    <li>A contact form for users to inquire about custom trips, questions, and bookings.</li>
+  </ul>
+  
+  <h3>5. User Authentication</h3>
+  <ul>
+    <li>Secure sign-up, log-in, and user profile management for handling bookings and personal details.</li>
+  </ul>
+  
+  <h2>Tech Stack</h2>
+  <ul>
+    <li><strong>Frontend:</strong> React, Tailwind CSS, React Router</li>
+    <li><strong>Backend:</strong> Node.js, Express</li>
+    <li><strong>Database:</strong> MongoDB</li>
+    <li><strong>Authentication:</strong> JWT</li>
+    <li><strong>Email Service:</strong> Nodemailer (for email notifications)</li>
+    <li><strong>Others:</strong> Mongoose (ODM), Axios (for API requests)</li>
+  </ul>
+  
+  <h2>Screenshots</h2>
+  
+  <h3>Homepage</h3>
+  <img src="yatra.png" alt="Homepage">
+  
+  <h3>Booking Page</h3>
+  <img src="Book.png" alt="Booking Page">
+  
+  <h2>Installation</h2>
+  <p>To run this project locally, follow these steps:</p>
+  
+  <h3>1. Clone the repository:</h3>
+  <pre><code>git clone https://github.com/Hack-the-Future-0-1/Coding-Heroes.git</code></pre>
+  
+  <h3>2. Navigate to the project directory:</h3>
+  <pre><code>cd Coding-heroes</code></pre>
+  
+  <h3>3. Install dependencies:</h3>
+  <h4>For the frontend:</h4>
+  <pre><code>cd frontend
+npm install</code></pre>
+  
+  <h4>For the backend:</h4>
+  <pre><code>
+npm install</code></pre>
+  
+  <h3>4. Set up environment variables</h3>
+  <p>Create a <code>.env</code> file in both the <code>client</code> and <code>server</code> folders and add the necessary environment variables.</p>
+  
+  <h4>For the <code>server/.env</code> file:</h4>
+  <pre><code>MONGO_URI=mongodb://your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+EMAIL_HOST=smtp.your-email-provider.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-email-password</code></pre>
+  
+  <h4>For the <code>client/.env</code> file:</h4>
+  <pre><code>REACT_APP_API_URL=http://localhost:5000</code></pre>
+  
+  <h3>5. Run the app</h3>
+  <h4>For the frontend:</h4>
+  <pre><code>cd frontend
+npm run dev</code></pre>
+  <p>The frontend will be available at <code>http://localhost:5173</code>.</p>
+  
+  <h4>For the backend:</h4>
+  <pre><code>cd server
+npm start</code></pre>
+  <p>The backend will be available at <code>http://localhost:8000</code>.</p>
+  
+  <h2>Contributing</h2>
+  <p>We welcome contributions! To get started, please follow these steps:</p>
+  <ol>
+    <li>Fork the repository.</li>
+    <li>Create a new branch:
+      <pre><code>git checkout -b feature-branch</code></pre>
+    </li>
+    <li>Make your changes and commit them:
+      <pre><code>git commit -m "Add new feature"</code></pre>
+    </li>
+    <li>Push to the branch:
+      <pre><code>git push origin feature-branch</code></pre>
+    </li>
+    <li>Create a new Pull Request.</li>
+  </ol>
+  
+  <h2>License</h2>
+  <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+  
+  <h2>Acknowledgements</h2>
+  <ul>
+    <li>Thanks to the contributors and everyone who helped make this project possible!</li>
+    <li>Special thanks to <a href="https://tailwindcss.com/">Tailwind CSS</a> for their wonderful utility-first framework and <a href="https://reactjs.org/">React</a> for its powerful frontend capabilities.</li>
+  </ul>
+  
+  <h2>Contact</h2>
+  <p>For inquiries or suggestions, feel free to contact us at:</p>
+  <ul>
+    <li><strong>Email:</strong> <a href="mailto:info.nepalyatra@gmail.com">info.nepalyatra@gmail.com</a></li>
+    <li><strong>Phone:</strong> +977 9806498176</li>
+  </ul>
+</body>
+</html>
