@@ -7,7 +7,7 @@ const experienceSchema = new mongoose.Schema(
     content: { type: String, required: true },
     location: { type: String, required: true },
     images: [{ type: String }],
-    userId: { type: String, required: true }, // Here, using simple String (username/email)
+    userId: { type: String }, // Here, using simple String (username/email)
     tags: [{ type: String }],
     rating: { type: Number, default: 0, min: 0, max: 5 },
     publishedAt: { type: Date, default: Date.now },

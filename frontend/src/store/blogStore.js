@@ -7,31 +7,35 @@ const useBlogStore = create((set) => ({
   error: null,
   selectedBlog: null,
 
+  // Fetch all blogs
   fetchBlogs: async () => {
     set({ isLoading: true, error: null });
     try {
       const response = await axiosInstance.get('/experience');
       set({ blogs: response.data.experiences });
     } catch (error) {
-      set({ error: 'Failed to fetch data', blogs: [] });
+      console.error('Error fetching blogs:', error);
+      set({ error: 'Failed to fetch blogs', blogs: [] });
     } finally {
       set({ isLoading: false });
     }
   },
 
+  // Fetch specific blog by ID
   setSelectedBlog: async (id) => {
     set({ isLoading: true, selectedBlog: null });
     try {
       const response = await axiosInstance.get(`/experience/${id}`);
       set({ selectedBlog: response.data.experience });
     } catch (error) {
-      set({ selectedBlog: null });
       console.error('Failed to fetch blog details:', error);
+      set({ selectedBlog: null });
     } finally {
       set({ isLoading: false });
     }
   },
 
+  // Like blog by ID
   incrementLike: async (id) => {
     try {
       const response = await axiosInstance.post(`/experience/like/${id}`);

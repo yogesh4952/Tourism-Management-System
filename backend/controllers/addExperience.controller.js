@@ -5,16 +5,29 @@ export const addExperience = async (req, res) => {
     const { title, description, content, location, images, tags, rating } =
       req.body;
 
-    const userId = req.user._id;
-    console.log('userId: ', userId);
+    // Ensure user is authenticated and has a valid ID
+    // if (!req.user || !req.user._id) {
+    //   return res.status(401).json({ message: 'Unauthorized user' });
+    // }
+
+    if (!title || !description || !content || !location) {
+      return res
+        .status(400)
+        .json({ message: 'Please provide all required fields.' });
+    }
+
+    // const userId = req.user._id;
+    // console.log('User ID:', userId);
+
     const newExperience = new Experience({
       title,
       description,
       content,
       location,
-      userId,
+
       tags,
       rating,
+      images: images || [],
     });
 
     await newExperience.save();
@@ -24,9 +37,10 @@ export const addExperience = async (req, res) => {
       experience: newExperience,
     });
   } catch (error) {
+    console.error('Error adding experience:', error);
     res
       .status(500)
-      .json({ message: 'Error adding experience: ' + error.message });
+      .json({ message: `Error adding experience: ${error.message}` });
   }
 };
 

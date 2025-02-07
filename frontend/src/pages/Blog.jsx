@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import useBlogStore from '../store/blogStore';
+import { Link } from 'react-router-dom'; // Import Link
 
 const Blog = () => {
   const {
@@ -80,6 +81,14 @@ const Blog = () => {
                 </div>
               ))}
             </div>
+
+            {/* Always show the "Post a Blog" button */}
+            <Link
+              to='/create-blog'
+              className='btn btn-primary mt-4 block text-center'
+            >
+              Post a Blog
+            </Link>
 
             {/* Display selected blog details in a Modal */}
             {selectedBlog && (
