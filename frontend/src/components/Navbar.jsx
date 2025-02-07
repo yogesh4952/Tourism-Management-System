@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,10 +14,11 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 text-lg">
-          <Link className="hover:text-gray-300 transition duration-300" to="/">Home</Link>
-          <Link className="hover:text-gray-300 transition duration-300" to="/accommodation">Accommodation</Link>
-          <Link className="hover:text-gray-300 transition duration-300" to="/destinations">Destinations</Link>
+          <NavLink className="hover:text-gray-300 transition duration-300" to="/">Home</NavLink>
+          <NavLink className="hover:text-gray-300 transition duration-300" to="/accomodation">Accommodation</NavLink>
+          <NavLink className="hover:text-gray-300 transition duration-300" to="/Destination">Destinations</NavLink>
           <Link className="hover:text-gray-300 transition duration-300" to="/important-details">Pricing</Link>
+          <NavLink  className="btn btn-primary" to="/login">Login</NavLink>
         </div>
 
         {/* Mobile Menu Button */}
@@ -28,10 +30,10 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-16 left-0 w-full bg-gray-800 shadow-lg p-5 rounded-b-lg">
-          <Link className="block py-3 text-lg hover:text-gray-300" to="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link className="block py-3 text-lg hover:text-gray-300" to="/accommodation" onClick={() => setIsOpen(false)}>Accommodation</Link>
-          <Link className="block py-3 text-lg hover:text-gray-300" to="/destinations" onClick={() => setIsOpen(false)}>Destinations</Link>
-          <Link className="block py-3 text-lg hover:text-gray-300" to="/important-details" onClick={() => setIsOpen(false)}>Pricing</Link>
+          <NavLink className="block py-3 text-lg hover:text-gray-300" to="/" onClick={() => setIsOpen(false)}>Home</NavLink>
+          <NavLink className="block py-3 text-lg hover:text-gray-300" to="/accommodation" onClick={() => setIsOpen(false)}>Accommodation</NavLink>
+          <NavLink className="block py-3 text-lg hover:text-gray-300" to="/destinations" onClick={() => setIsOpen(false)}>Destinations</NavLink>
+          <NavLink className="block py-3 text-lg hover:text-gray-300" to="/important-details" onClick={() => setIsOpen(false)}>Pricing</NavLink>
         </div>
       )}
     </nav>

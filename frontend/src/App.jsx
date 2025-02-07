@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import DestinationPage from './pages/DestinationPage';
 import Applayout from './components/Applayout';
 import AccomodationPage from './pages/AccomodationPage';
+import LoginPage from './pages/LoginPage';
 
 const App = () => {
 
@@ -29,7 +30,12 @@ const App = () => {
         {
           path: "/accomodation",
           element: <AccomodationPage />,
-        }
+        },
+        {
+          path: "/login",
+          element:<LoginPage/>,
+        },
+
       ]
 
 
