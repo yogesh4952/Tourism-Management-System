@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import AboutPage from './pages/AboutPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import DestinationPage from './pages/DestinationPage.jsx';
@@ -16,6 +13,7 @@ import SignUpPage from './pages/SignUpPage.jsx';
 import Payment from './components/Payment.jsx';
 import PaymentSuccess from './pages/PaymentSuccess.jsx';
 import PaymentFailure from './pages/PaymentFailure.jsx';
+import CreateBlog from './pages/CreateBlog.jsx';
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -43,8 +41,7 @@ const App = () => {
           element: <DestinationDetailPage />,
         },
         {
-
-          path: "/accommodation",
+          path: '/accommodation',
 
           element: <AccomodationPage />,
         },
@@ -53,10 +50,9 @@ const App = () => {
           element: <GuidePage />,
         },
         {
-          path:'/signup',
-          element:<SignUpPage/>
+          path: '/signup',
+          element: <SignUpPage />,
         },
-       
 
         {
           path: '/login',
@@ -78,6 +74,10 @@ const App = () => {
           element: <PaymentFailure />,
         },
 
+        {
+          path: '/create-blog',
+          element: <CreateBlog />,
+        },
         {
           path: '/*',
           element: <ErrorPage />,
