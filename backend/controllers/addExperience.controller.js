@@ -34,7 +34,7 @@ export const getAllExperiences = async (req, res) => {
   try {
     // Fetch all experiences sorted by the latest published date
     const experiences = await Experience.find()
-      .sort({ publishedAt: -1 }) // Show the most recent first
+      .sort({ likesCount: -1 }) // Show the most recent first
       .select('-__v'); // Exclude the MongoDB version field
 
     res.status(200).json({
@@ -127,6 +127,34 @@ export const deleteExperience = async (req, res) => {
     res
       .status(500)
       .json({ message: 'Error deleting experience: ' + error.message });
+  }
+};
+
+export const likeExperience = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find the experience by ID
+    const experience = await Experience.findById(id);
+
+    if (!experience) {
+      return res.status(404).json({ message: 'Experience not found' });
+    }
+
+    // Increment the likes count by 1
+    experience.likesCount += 1;
+
+    // Save the updated experience
+    await experience.save();
+
+    res.status(200).json({
+      message: 'Experience liked successfully',
+      experience,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error liking experience: ' + error.message,
+    });
   }
 };
 
