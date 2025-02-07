@@ -127,3 +127,15 @@ export const deleteDestination = async (req, res) => {
       .json({ message: 'Error deleting destination: ' + error.message });
   }
 };
+
+export const deleteAll = async (req, res) => {
+  try {
+    await Destinations.deleteMany({});
+
+    res.json({ message: 'All destinations deleted successfully' });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: 'Error deleting destinations: ' + error.message });
+  }
+};
