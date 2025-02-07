@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router';
+import Payment from './Payment';
+
 const HotelCard = ({ hotel }) => {
+  const navigate = useNavigate();
   return (
     <div className='card w-full sm:w-96 bg-base-100 shadow-xl'>
       {/* Hotel Image */}
@@ -32,7 +36,12 @@ const HotelCard = ({ hotel }) => {
 
         {/* Book Now Button */}
         <div className='card-actions justify-end mt-4'>
-          <button className='btn btn-primary'>Book Now</button>
+          <button
+            className='btn btn-primary'
+            onClick={() => navigate(`/payment/${hotel.id}`)}
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </div>
