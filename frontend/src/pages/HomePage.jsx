@@ -1,6 +1,8 @@
-import HotelPage from '../components/HotelCard';
-
 const HomePage = () => {
-  return <HotelPage />;
+  return (
+    <div>
+      home
+    </div>
+  );
 };
 export default HomePage;

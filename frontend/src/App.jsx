@@ -1,43 +1,26 @@
-import { Routes, Route, createBrowserRouter, RouterProvider } from 'react-router';
+import { Routes, Route} from 'react-router';
 import AboutPage from './pages/AboutPage';
-import HomePage from './pages/HomePage';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import DestinationPage from './pages/DestinationPage';
-import Applayout from './components/Applayout';
-import AccomodationPage from './pages/AccomodationPage';
+import DestinationDetailPage from './pages/DestinationDetailPage';
+import HomePage from './pages/HomePage';
 
 const App = () => {
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Applayout />,
-      children: [
-        {
-
-          path: "/",
-          element: <HomePage />,
-        },
-        {
-          path: "/about",
-          element: <AboutPage />,
-        },
-        {
-          path: "/Destination",
-          element: <DestinationPage />,
-
-        },
-        {
-          path: "/accomodation",
-          element: <AccomodationPage />,
-        }
-      ]
-
-
-
-
-    }
-  ]);
-  return <RouterProvider router={router} />;
-
+  return (
+    <div className='w-full max-w-screen-xl mx-auto px-4'>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/destination' element={<DestinationPage />} />
+        <Route
+          path='destination-detail/:placeId'
+          element={<DestinationDetailPage />}
+        />
+      </Routes>
+      <Footer />
+    </div>
+  );
 };
 export default App;
