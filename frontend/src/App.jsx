@@ -1,10 +1,10 @@
-import { Routes, Route } from 'react-router';
-import HomePage from './pages/HomePage';
+import { Routes, Route} from 'react-router';
 import AboutPage from './pages/AboutPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import DestinationPage from './pages/DestinationPage';
 import DestinationDetailPage from './pages/DestinationDetailPage';
+import HomePage from './pages/HomePage';
 
 const App = () => {
   return (
