@@ -1,11 +1,13 @@
 import { Routes, Route, createBrowserRouter, RouterProvider } from 'react-router';
-import AboutPage from './pages/AboutPage';
-import HomePage from './pages/HomePage';
-import DestinationPage from './pages/DestinationPage';
-import Applayout from './components/Applayout';
-import AccomodationPage from './pages/AccomodationPage';
-import LoginPage from './pages/LoginPage';
-
+import AboutPage from './pages/AboutPage.jsx'
+import HomePage from './pages/HomePage.jsx';
+import DestinationPage from './pages/DestinationPage.jsx';
+import Applayout from './components/Applayout.jsx';
+import AccomodationPage from './pages/AccomodationPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import Blog from './pages/Blog.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
+import GuidePage from './pages/GuidePage.jsx';
 const App = () => {
 
   const router = createBrowserRouter([
@@ -17,10 +19,15 @@ const App = () => {
 
           path: "/",
           element: <HomePage />,
+
         },
         {
           path: "/about",
           element: <AboutPage />,
+        },
+        {
+          path: "/Blog",
+          element: <Blog />,
         },
         {
           path: "/Destination",
@@ -32,9 +39,18 @@ const App = () => {
           element: <AccomodationPage />,
         },
         {
-          path: "/login",
-          element:<LoginPage/>,
+          path:"/Guide",
+          element:<GuidePage/>
         },
+       
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
+{
+  path:'/*',
+  element:<ErrorPage/>
+},
 
       ]
 

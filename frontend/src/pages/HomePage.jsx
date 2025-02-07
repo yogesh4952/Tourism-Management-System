@@ -1,60 +1,81 @@
+'use client';
 
-import { MapPin } from "lucide-react";
+import { useState } from "react";
+import { MapPin, Menu, X } from "lucide-react"; // Importing the Menu and X icons
+import { NavLink } from "react-router-dom";
 
-export default function HomePage() {
+const HomePage = () => {
+  const [isOpen, setIsOpen] = useState(false); // Define state for mobile menu toggle
+  
+  const destinations = [
+    {
+      image: "https://via.placeholder.com/600x400?text=Mountain+Retreat",
+      title: "Mountain Retreat",
+      location: "Chitwan",
+      price: "$299"
+    },
+    {
+      image: "https://via.placeholder.com/600x400?text=Beach+Resort",
+      title: "Beach Resort",
+      location: "Kathmandu",
+      price: "$399"
+    },
+    {
+      image: "https://via.placeholder.com/600x400?text=City+Escape",
+      title: "City Escape",
+      location: "Solukhumbu",
+      price: "$259"
+    }
+  ];
+
   return (
     <>
-      <section className="relative w-full h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/images/tourism-1.jpg')" }}>
-        <div className="absolute inset-0 bg-grey bg-opacity-50"></div>
-        <div className="relative z-10 text-center text-white px-6 md:px-12">
-          <h1 className="text-5xl md:text-7xl font-bold">Experience Luxury & Comfort</h1>
-          <p className="mt-4 text-lg md:text-2xl">Discover our handpicked collection of luxury hotels and resorts.</p>
-          <div className="gap-4 mt-8 flex justify-center">
-          <input type="text" className="mt-5 w-1/2 md:w-1/3 px-3 py-2 rounded-lg shadow-md focus:outline-none" placeholder="Enter your destination" />
-
-        <button className="mt-6 px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold text-lg rounded-lg shadow-lg transition">
-          Explore Now
-       </button>
-          </div>
      
 
+     <div className="bg-gray-100 text-gray-800 font-sans">
+        {/* Hero Section */}
+        <div className="relative h-screen flex items-center justify-center bg-gray-900">
+          <img
+            src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            alt="Hero Background"
+            className="absolute inset-0 w-full h-full object-cover opacity-50"
+          />
+          <div className="text-center z-10">
+            <h1 className="text-5xl font-bold text-white mb-4">
+              Explore the World with Us
+            </h1>
+            <p className="text-xl text-gray-300 mb-8">
+              Your journey begins here. Discover the best in tourism and hospitality.
+            </p>
+            <button className="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+              Explore
+            </button>
+          </div>
         </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-16 bg-gray-100 text-center">
-        <h2 className="text-4xl font-bold text-gray-900">Why Choose Us</h2>
-        <p className="text-lg text-gray-600 mt-2">We provide exceptional service and unforgettable experiences</p>
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-16">
-          {[{"icon": MapPin, "title": "Prime Locations", "desc": "Situated in the most sought-after destinations worldwide"},
-            {"icon": MapPin, "title": "5-Star Service", "desc": "Exceptional service that exceeds expectations"},
-            {"icon": MapPin, "title": "Expert Staff", "desc": "Dedicated team of hospitality professionals"},
-            {"icon": MapPin, "title": "Easy Booking", "desc": "Simple and secure reservation process"}
-          ].map((item, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-              <item.icon className="text-yellow-500 w-12 h-12" />
-              <h3 className="mt-4 text-xl font-semibold">{item.title}</h3>
-              <p className="text-gray-600 mt-2">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      </div>
 
       {/* Popular Destinations Section */}
-      <section className="py-16 bg-white text-center">
-        <h2 className="text-4xl font-bold text-gray-900">Popular Destinations</h2>
+      <section className="py-16 bg-gray-50 text-center">
+        <h2 className="text-4xl font-extrabold text-gray-900">Popular Destinations</h2>
         <p className="text-lg text-gray-600 mt-2">Explore our most beloved locations</p>
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-16">
-          {[{"image": "/images/mountain.jpg", "title": "Mountain Retreat", "location": "Chitwan", "price": "$299"},
-            {"image": "/images/beach.jpg", "title": "Beach Resort", "location": "Kathmandu", "price": "$399"},
-            {"image": "/images/city.jpg", "title": "City Escape", "location": "Solukhumbu", "price": "$259"}
-          ].map((destination, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <img src={destination.image} alt={destination.title} className="w-full h-64 object-cover" />
-              <div className="p-6 text-left">
-                <h3 className="text-xl font-semibold text-gray-900">{destination.title}</h3>
-                <p className="text-gray-600 flex items-center gap-2"><MapPin className="w-4 h-4 text-yellow-500" /> {destination.location}</p>
-                <p className="text-yellow-600 font-bold mt-2">From {destination.price} / night</p>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-16">
+          {destinations.map((destination, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out">
+              <img
+                src={destination.image}
+                alt={destination.title}
+                className="w-full h-64 object-cover rounded-t-lg"
+              />
+              <div className="p-6">
+                <h3 className="text-2xl font-semibold text-gray-900">{destination.title}</h3>
+                <p className="text-gray-600 flex items-center gap-2 mt-2">
+                  <MapPin className="w-5 h-5 text-yellow-500" />
+                  {destination.location}
+                </p>
+                <p className="text-xl font-bold text-yellow-600 mt-4">From {destination.price} / night</p>
+                <button className="mt-4 px-6 py-2 bg-yellow-500 text-white rounded-full shadow-lg hover:bg-yellow-600 transition duration-200">
+                  Book Now
+                </button>
               </div>
             </div>
           ))}
@@ -62,4 +83,6 @@ export default function HomePage() {
       </section>
     </>
   );
-}
+};
+
+export default HomePage;
