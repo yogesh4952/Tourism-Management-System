@@ -24,6 +24,7 @@ export default function Navbar() {
     { path: '/destination', label: 'Destinations' },
     { path: '/blog', label: 'Blog' },
     { path: '/guide', label: 'Guide' },
+    {path: '/premium', label: 'Premium'},
     { path: '/about', label: 'About Us' },
   ];
 
@@ -42,7 +43,7 @@ export default function Navbar() {
               key={path}
               to={path}
               className={({ isActive }) =>
-                `hover:text-primary transition duration-300 ${
+                `hover:text-primary transition duration-300 font-medium ${
                   isActive ? 'text-primary font-bold' : ''
                 }`
               }

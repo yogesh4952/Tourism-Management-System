@@ -15,7 +15,7 @@ export const ThemeToggle = () => {
         theme === 'light' ? 'bg-gray-300  ' : 'bg-gray-800 border-gray-700'
       }`}
       aria-label='Toggle Theme'
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      onClick={() => setTheme(theme === 'light' ? 'dracula' : 'light')}
     >
       <ThemeTogglerIcon theme={theme} />
     </button>

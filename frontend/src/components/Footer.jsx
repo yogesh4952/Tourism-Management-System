@@ -12,7 +12,7 @@ import Logo from '../Icon/Logo';
 
 const Footer = () => {
   return (
-    <footer className=' py-10'>
+    <footer className='py-10'>
       <div className='max-w-6xl mx-auto px-6 grid md:grid-cols-4 sm:grid-cols-2 gap-8'>
         {/* Brand Section */}
         <div>
@@ -58,13 +58,13 @@ const Footer = () => {
         <div>
           <h3 className='text-lg font-semibold mb-3'>Contact Us</h3>
           <p className='flex items-center gap-2'>
-            <Phone size={18} /> +1 (555) 123-4567
+            <Phone size={18} /> +977 980-123-4567
           </p>
           <p className='flex items-center gap-2'>
-            <Mail size={18} /> info@exploreworld.com
+            <Mail size={18} /> info.nepalyatra@gmail.com
           </p>
           <p className='flex items-center gap-2'>
-            <MapPin size={18} /> 123 Paradise St, Coastal City
+            <MapPin size={18} /> Thamel, Kathmandu
           </p>
         </div>
 
@@ -89,8 +89,8 @@ const Footer = () => {
       </div>
 
       {/* Copyright Section */}
-      <div className='text-center mt-8 text-sm opacity-75'>
-        © {new Date().getFullYear()} ExploreWorld. All Rights Reserved.
+      <div className='text-center mt-8 text-lg opacity-75'>
+        © {new Date().getFullYear()} नेपाल यात्रा . All Rights Reserved.
       </div>
     </footer>
   );

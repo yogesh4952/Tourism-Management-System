@@ -69,9 +69,9 @@ const AboutPage = () => {
           help make your travel experience extraordinary.
         </p>
         <a
-          href='mailto:info.nepal'
+          href='mailto:info.nepalYatra@gmail.com'
           target='_blank'
-          className=' btn btn-outline btn-secondary mt-2'
+          className=' btn btn-outline btn-primary mt-2'
         >
           Contact Us
         </a>

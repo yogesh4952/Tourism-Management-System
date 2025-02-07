@@ -1,81 +1,3 @@
-// import { useState } from "react";
-// import { Star } from "lucide-react";
-// import jhon from '../Images/person1.jpg';
-// import emily from '../Images/person2.jpg';
-// import carlos from '../Images/person3.jpg';
-// import sophia from '../Images/person4.jpg';
-// import David from '../Images/person5.jpg';
-// import sumit from '../Images/5.jpg';
-
-// const guides = [
-//   { id: 1, name: "John Smith", expertise: "Adventure", location: "Alaska", image: jhon, category: "Adventure", rating: 4.5 },
-//   { id: 2, name: "Emily Davis", expertise: "Cultural Tours", location: "Japan", image: emily, category: "Culture", rating: 4.8 },
-//   { id: 3, name: "Carlos Mendoza", expertise: "Wildlife", location: "Amazon", image: carlos, category: "Wildlife", rating: 4.7 },
-//   { id: 4, name: "Sophia Lee", expertise: "Luxury Travel", location: "France", image: sophia, category: "Luxury", rating: 4.9 },
-//   { id: 5, name: "David Brown", expertise: "Hiking", location: "Nepal", image: David, category: "Adventure", rating: 4.6 },
-//   { id: 6, name: "Sumit", expertise: "Hiking", location: "Nepal", image: sumit, category: "Adventure", rating: 4.3 },
-// ];
-
-// const GuidePage = () => {
-//   const [filter, setFilter] = useState("All");
-
-//   const filteredGuides = filter === "All" ? guides : guides.filter(guide => guide.category === filter);
-
-//   return (
-//     <section className="bg-gray-900 text-white py-12 px-6">
-//       <h2 className="text-3xl font-bold text-center mb-6">Meet Our Expert Guides</h2>
-
-//       {/* Filter Buttons */}
-//       <div className="flex justify-center gap-4 mb-8">
-//         {["All", "Adventure", "Culture", "Wildlife", "Luxury"].map((category) => (
-//           <button
-//             key={category}
-//             onClick={() => setFilter(category)}
-//             className={`px-4 py-2 rounded-full border transition ${
-//               filter === category ? "bg-gray-700 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-//             }`}
-//           >
-//             {category}
-//           </button>
-//         ))}
-//       </div>
-
-//       {/* Guide List */}
-//       <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-//         {filteredGuides.map((guide) => (
-//           <div
-//             key={guide.id}
-//             className="bg-gray-800 p-6 rounded-2xl shadow-lg text-center transition transform hover:scale-105 hover:shadow-2xl"
-//           >
-//             {/* Guide Image */}
-//             <img src={guide.image} alt={guide.name} className="w-24 h-24 mx-auto rounded-full border-4 border-gray-700" />
-
-//             {/* Guide Details */}
-//             <h3 className="text-xl font-semibold mt-4">{guide.name}</h3>
-//             <p className="text-lg mt-1 opacity-75">{guide.expertise} Guide</p>
-//             <p className="text-sm opacity-50">{guide.location}</p>
-
-//             {/* Rating System */}
-//             <div className="flex justify-center items-center gap-1 mt-3">
-//               {[...Array(5)].map((_, index) => (
-//                 <Star
-//                   key={index}
-//                   size={18}
-//                   className={index < Math.round(guide.rating) ? "text-yellow-400" : "text-gray-500"}
-//                   fill={index < Math.round(guide.rating) ? "currentColor" : "none"}
-//                 />
-//               ))}
-//               <span className="text-sm text-gray-300 ml-1">({guide.rating})</span>
-//               <button className="btn btn-primary">HireME</button>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default GuidePage;
 import { useState } from 'react';
 import {
   User,
@@ -176,27 +98,55 @@ const guides = [
 ];
 
 const categories = ['All', 'Adventure', 'Culture', 'Wildlife', 'Luxury'];
+const locations = [
+  'All',
+  'Everest Region',
+  'Kathmandu Valley',
+  'Chitwan National Park',
+  'Langtang Region',
+  'Annapurna Circuit',
+];
 
 const GuidePage = () => {
-  const [filter, setFilter] = useState('All');
+  const [filterCategory, setFilterCategory] = useState('All');
+  const [filterLocation, setFilterLocation] = useState('All');
 
-  const filteredGuides =
-    filter === 'All'
-      ? guides
-      : guides.filter((guide) => guide.category === filter);
+  const filteredGuides = guides.filter((guide) => {
+    return (
+      (filterCategory === 'All' || guide.category === filterCategory) &&
+      (filterLocation === 'All' || guide.location === filterLocation)
+    );
+  });
 
   return (
-    <section className=' py-12 px-6'>
+    <section className='py-12 px-6'>
+      <h2 className='text-3xl font-bold text-center mb-8'>
+        Meet Our Expert Guides
+      </h2>
+
       {/* Filter Buttons */}
       <div className='flex justify-center gap-4 mb-8 flex-wrap'>
         {categories.map((category) => (
           <button
             key={category}
-            onClick={() => setFilter(category)}
+            onClick={() => setFilterCategory(category)}
             className={`px-5 py-2 rounded-full border transition text-sm font-semibold flex items-center gap-2 
-`}
+              `}
           >
             <Filter size={16} /> {category}
+          </button>
+        ))}
+      </div>
+
+      {/* Location Filter */}
+      <div className='flex justify-center gap-4 mb-8 flex-wrap'>
+        {locations.map((location) => (
+          <button
+            key={location}
+            onClick={() => setFilterLocation(location)}
+            className={`px-5 py-2 rounded-full border transition text-sm font-semibold flex items-center gap-2 `}
+          >
+            <MapPin size={16} /> {location}
           </button>
         ))}
       </div>
@@ -212,7 +162,7 @@ const GuidePage = () => {
             <img
               src={guide.image}
               alt={guide.name}
-              className='w-24 h-24 mx-auto rounded-full border-4 border-gray-700'
+              className='w-24 h-24 mx-auto rounded-full border-4 '
             />
 
             {/* Guide Info */}
@@ -236,7 +186,7 @@ const GuidePage = () => {
               <Briefcase size={18} /> {guide.experience} Experience
             </p>
 
-            <p className='text-lg font-semibold flex items-center justify-center gap-2 text-green-400 mt-2'>
+            <p className='text-lg font-semibold flex items-center justify-center gap-2  mt-2'>
               {guide.price}
             </p>
 
@@ -244,13 +194,13 @@ const GuidePage = () => {
             <div className='mt-4 flex justify-center gap-4'>
               <a
                 href={`tel:${guide.contact}`}
-                className='bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-green-600'
+                className='btn btn-outline btn-primary px-4 py-2 rounded-lg flex items-center gap-2 '
               >
                 <PhoneCall size={16} /> Call
               </a>
               <a
                 href={`mailto:${guide.email}`}
-                className='bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600'
+                className=' btn btn-primary px-4 py-2 rounded-lg flex items-center gap-2 '
               >
                 <Mail size={16} /> Email
               </a>

@@ -1,12 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { touristPlaces } from '../assets/assets';
 import TouristPlaceCard from '../components/TouristPlaceCard';
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa'; // Import icons
+import Loader from '../components/Loader';
 
 const DestinationPage = () => {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [showFilters, setShowFilters] = useState(false); // State for toggling filters
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  });
 
   // Extract unique locations from tourist places
   const locations = [...new Set(touristPlaces.map((place) => place.location))];
@@ -104,16 +112,23 @@ const DestinationPage = () => {
         <div className='flex-1 flex flex-col gap-6 items-center'>
           <h1 className='text-2xl font-bold mb-6'>Top Tourist Places</h1>
 
+          {loading ? (
+            <div className='flex justify-center items-center w-full min-h-[300px]'>
+              <Loader />
+            </div>
+          ) : (
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-24'>
+              {filteredPlaces.length > 0 ? (
+                filteredPlaces.map((place, index) => (
+                  <TouristPlaceCard key={index} place={place} />
+                ))
+              ) : (
+                <p className='text-center text-gray-500'>No places found.</p>
+              )}
+            </div>
+          )}
+
           {/* Display filtered tourist places */}
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-24'>
-            {filteredPlaces.length > 0 ? (
-              filteredPlaces.map((place, index) => (
-                <TouristPlaceCard key={index} place={place} />
-              ))
-            ) : (
-              <p className='text-center text-gray-500'>No places found.</p>
-            )}
-          </div>
         </div>
       </div>
     </div>

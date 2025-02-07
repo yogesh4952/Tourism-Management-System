@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HotelCard from '../components/HotelCard';
 import { hotels } from '../assets/assets';
+import Loader from '../components/Loader';
 
 const AccommodationPage = () => {
   const [filters, setFilters] = useState({
@@ -8,17 +9,19 @@ const AccommodationPage = () => {
     priceRange: [0, 50000],
     minRating: 0,
   });
+
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  if (!Array.isArray(hotels)) {
-    return <div className='text-center py-6'>Loading...</div>;
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
-  // Normalize location strings for comparison
   const normalizeString = (str) => str.trim().toLowerCase();
 
-  // Filter hotels based on the filters state
   const filteredHotels = hotels.filter((hotel) => {
     const priceCondition =
       hotel.price >= filters.priceRange[0] &&
@@ -33,11 +36,9 @@ const AccommodationPage = () => {
     return priceCondition && ratingCondition && locationCondition;
   });
 
-  // Paginate the filtered hotels
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = currentPage * itemsPerPage;
   const paginatedHotels = filteredHotels.slice(startIndex, endIndex);
-
   const totalPages = Math.ceil(filteredHotels.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
@@ -46,7 +47,7 @@ const AccommodationPage = () => {
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
-    setCurrentPage(1); // Reset page to 1 when filters change
+    setCurrentPage(1);
   };
 
   const toggleLocation = (location) => {
@@ -63,7 +64,7 @@ const AccommodationPage = () => {
         <div className='space-y-6'>
           <h2 className='text-xl font-semibold'>Filters</h2>
 
-          {/* Location Filter with checkboxes */}
+          {/* Location Filter */}
           <div>
             <h3 className='font-medium text-lg'>Location</h3>
             <div className='space-y-2'>
@@ -74,6 +75,7 @@ const AccommodationPage = () => {
                 'Gandaki Province',
                 'Lumbini Province',
                 'Karnali Province',
+                'Sudurpashchim Province',
               ].map((location) => (
                 <div key={location} className='flex items-center space-x-2'>
                   <input
@@ -133,42 +135,58 @@ const AccommodationPage = () => {
         </div>
 
         {/* Hotels List */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 items-center gap-10'>
-          {paginatedHotels.map((hotel) => (
-            <HotelCard key={hotel.id} hotel={hotel} />
-          ))}
-        </div>
-      </div>
+        {loading ? (
+          <div className='flex justify-center items-center w-full min-h-[300px]'>
+            <Loader />
+          </div>
+        ) : (
+          <div className='flex-1'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 items-center gap-10'>
+              {paginatedHotels.length > 0 ? (
+                paginatedHotels.map((hotel) => (
+                  <HotelCard key={hotel.id} hotel={hotel} />
+                ))
+              ) : (
+                <div className='col-span-2 text-center text-gray-500'>
+                  No hotels found matching your criteria
+                </div>
+              )}
+            </div>
 
-      {/* Pagination */}
-      <div className='flex justify-center mt-6 space-x-4'>
-        <button
-          disabled={currentPage === 1}
-          onClick={() => handlePageChange(currentPage - 1)}
-          className='px-4 py-2 bg-blue-500 text-white rounded-md disabled:bg-gray-300'
-        >
-          Previous
-        </button>
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index + 1}
-            className={`px-4 py-2 rounded-md ${
-              currentPage === index + 1
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200'
-            }`}
-            onClick={() => handlePageChange(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() => handlePageChange(currentPage + 1)}
-          className='px-4 py-2 bg-blue-500 text-white rounded-md disabled:bg-gray-300'
-        >
-          Next
-        </button>
+            {/* Pagination - Only show when results exist */}
+            {paginatedHotels.length > 0 && (
+              <div className='flex justify-center mt-6 space-x-4'>
+                <button
+                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  className='px-4 py-2 bg-blue-500 text-white rounded-md disabled:bg-gray-300'
+                >
+                  Previous
+                </button>
+                {[...Array(totalPages)].map((_, index) => (
+                  <button
+                    key={index + 1}
+                    className={`px-4 py-2 rounded-md ${
+                      currentPage === index + 1
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-gray-200'
+                    }`}
+                    onClick={() => handlePageChange(index + 1)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+                <button
+                  disabled={currentPage === totalPages}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  className='px-4 py-2 bg-blue-500 text-white rounded-md disabled:bg-gray-300'
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

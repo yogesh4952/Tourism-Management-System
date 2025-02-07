@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const ErrorPage= () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center px-4">
+    <div className="min-h-screen  flex items-center justify-center px-4">
       <div className="max-w-lg text-center relative">
         {/* Floating 404 number */}
         <div className="animate-float text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-600">
@@ -12,10 +12,10 @@ const ErrorPage= () => {
 
         {/* Main content */}
         <div className="relative ">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          <h1 className="text-4xl font-bold  mb-4">
             Oops! Lost in Space
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-xl  mb-8">
             The page you're looking for seems to have drifted off into the cosmic 
             void. Let's get you back to safety!
           </p>
