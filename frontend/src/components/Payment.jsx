@@ -50,25 +50,25 @@ const Payment = () => {
   }, [formData.amount]);
 
   return (
-    <div className='flex min-h-screen items-center justify-center bg-gradient-to-r from-gray-800 to-gray-900'>
+    <div className='flex min-h-screen items-center justify-center bg-gradient-to-r from-gray-900 to-black'>
       <form
         action='https://rc-epay.esewa.com.np/api/epay/main/v2/form'
         method='POST'
-        className='w-full max-w-md bg-gray-300 text-black p-8 rounded-3xl shadow-2xl transform transition-all hover:scale-105'
+        className='w-full max-w-md bg-gray-800 text-white p-8 rounded-3xl shadow-xl transform transition-all hover:scale-105'
       >
-        <h1 className='text-3xl font-extrabold mb-6 text-center text-green-600'>
+        <h1 className='text-3xl font-extrabold mb-6 text-center text-green-500'>
           Secure Checkout
         </h1>
 
         <div className='mb-6'>
           <label
             htmlFor='amount'
-            className='block text-sm font-semibold text-green-700 mb-2'
+            className='block text-sm font-semibold text-green-400 mb-2'
           >
             Amount
           </label>
           <div className='relative'>
-            <DollarSign className='absolute left-3 top-3 text-green-500' />
+            <DollarSign className='absolute left-3 top-3 text-green-400' />
             <input
               type='text'
               id='amount'
@@ -83,7 +83,7 @@ const Payment = () => {
                 })
               }
               required
-              className='w-full pl-10 py-3 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+              className='w-full pl-10 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
             />
           </div>
         </div>
@@ -163,17 +163,17 @@ const Payment = () => {
         <div className='mb-6'>
           <label
             htmlFor='first_name'
-            className='block text-sm font-semibold text-green-700 mb-2'
+            className='block text-sm font-semibold text-green-400 mb-2'
           >
             First Name
           </label>
           <div className='relative'>
-            <User className='absolute left-3 top-3 text-green-500' />
+            <User className='absolute left-3 top-3 text-green-400' />
             <input
               type='text'
               id='first_name'
               name='first_name'
-              className='w-full pl-10 py-3 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+              className='w-full pl-10 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
               required
             />
           </div>
@@ -182,17 +182,17 @@ const Payment = () => {
         <div className='mb-6'>
           <label
             htmlFor='last_name'
-            className='block text-sm font-semibold text-green-700 mb-2'
+            className='block text-sm font-semibold text-green-400 mb-2'
           >
             Last Name
           </label>
           <div className='relative'>
-            <User className='absolute left-3 top-3 text-green-500' />
+            <User className='absolute left-3 top-3 text-green-400' />
             <input
               type='text'
               id='last_name'
               name='last_name'
-              className='w-full pl-10 py-3 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+              className='w-full pl-10 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
               required
             />
           </div>
