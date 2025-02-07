@@ -2,4 +2,3 @@ premium routes vayo (get premium hotels)
 cron job for scheduling validation
 authentication routes
 mail system
-

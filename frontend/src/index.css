@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&family=Outfit:wght@100..900&display=swap');
 
 @import 'tailwindcss';
 @plugin 'daisyui';
 
-body{
-  font-family: 'Outfit', sans-serif;
+body {
+  font-family: 'Outfit', 'Mukta', sans-serif;
 }
 
 ::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-import { useState } from 'react'; // Importing the MapPin icon
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { touristPlaces } from '../assets/assets';
 import TouristPlaceCard from '../components/TouristPlaceCard';
@@ -7,13 +7,43 @@ import Button from '../components/Button';
 import { Typewriter } from 'react-simple-typewriter';
 import WhyChooseUsPage from './WhyChooseUsPage';
 import GetInTouch from '../components/GetInTouch';
+import { useLanguageContext } from '../context/LanguageContext';
 
 const HomePage = () => {
-  const [isOpen, setIsOpen] = useState(false); // Define state for mobile menu toggle
+  const [isOpen, setIsOpen] = useState(false);
+  const { language } = useLanguageContext();
 
   const popularDestinations = touristPlaces.filter((place) => place.id < 7);
 
-  console.log(popularDestinations, 'popularDestinations');
+  // Translation dictionary
+  const translations = {
+    en: {
+      typewriter: [
+        'Explore Nepal with Us',
+        'Your Adventure Awaits',
+        'Discover the Best Destinations',
+      ],
+      heroSubtitle:
+        'Your journey begins here. Discover the best in tourism and hospitality.',
+      popularDestinations: 'Popular Destinations',
+      destinationsSubtext: 'Explore our most beloved locations',
+      viewAll: 'View All Destinations',
+      testimonialTitle: 'What Our Travelers Say',
+    },
+    ne: {
+      typewriter: [
+        'हाम्रो साथमा नेपाल अन्वेषण गर्नुहोस्',
+        'तपाईंको साहसिक यात्रा पर्खि रहेको छ',
+        'उत्तम गन्तव्यहरू पत्ता लगाउनुहोस्',
+      ],
+      heroSubtitle:
+        'तपाईंको यात्रा यहाँबाट सुरु हुन्छ। पर्यटन र आतिथ्यको उत्तमतम आनन्द लिनुहोस्।',
+      popularDestinations: 'लोकप्रिय गन्तव्यहरू',
+      destinationsSubtext: 'हाम्रा प्रिय स्थानहरू अन्वेषण गर्नुहोस्',
+      viewAll: 'सबै गन्तव्यहरू हेर्नुहोस्',
+      testimonialTitle: 'हाम्रा यात्रुहरू के भन्छन्',
+    },
+  };
 
   return (
     <>
@@ -28,11 +58,7 @@ const HomePage = () => {
           <div className='text-center relative z-10 flex flex-col items-center justify-center '>
             <h1 className='text-5xl font-bold mb-4'>
               <Typewriter
-                words={[
-                  'Explore Nepal with Us',
-                  'Your Adventure Awaits',
-                  'Discover the Best Destinations',
-                ]}
+                words={translations[language].typewriter}
                 loop={true}
                 cursor
                 cursorStyle='|'
@@ -42,8 +68,7 @@ const HomePage = () => {
               />
             </h1>
             <p className='text-xl mb-8'>
-              Your journey begins here. Discover the best in tourism and
-              hospitality.
+              {translations[language].heroSubtitle}
             </p>
             <NavLink to='/destination' className='self-center'>
               <Button />
@@ -58,29 +83,31 @@ const HomePage = () => {
         {/* Popular Destinations Section */}
         <section className='py-16 bg-base-100 text-center'>
           <h2 className='text-4xl font-extrabold text-base-content'>
-            Popular Destinations
+            {translations[language].popularDestinations}
           </h2>
           <p className='text-lg text-base-content/70 mt-2'>
-            Explore our most beloved locations
+            {translations[language].destinationsSubtext}
           </p>
           <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-16'>
-            {popularDestinations.map((place) => {
-              return <TouristPlaceCard key={place.id} place={place} />;
-            })}
+            {popularDestinations.map((place) => (
+              <TouristPlaceCard key={place.id} place={place} />
+            ))}
           </div>
 
           <NavLink to='/destination'>
             <button className='btn btn-primary mt-8 px-6 py-3 rounded-lg transition duration-300 hover:bg-blue-700'>
-              View All Destinations
+              {translations[language].viewAll}
             </button>
           </NavLink>
         </section>
 
         <div className='py-16 bg-base-200 text-center'>
+          <h2 className='text-4xl font-extrabold mb-8'>
+            {translations[language].testimonialTitle}
+          </h2>
           <TestimonialSlider />
         </div>
       </div>
-      {/* why choose us  */}
 
       <GetInTouch />
     </>
