@@ -39,7 +39,7 @@ const DestinationPage = () => {
   });
 
   return (
-    <div className='mt-10 px-4'>
+    <div className='mt-10 px-4 mb-10'>
       <div className='flex flex-col xl:flex-row gap-6'>
         {/* Left Side: Filters */}
         <div className='w-full xl:w-1/4 bg-base-200 p-6 rounded-lg shadow-md'>

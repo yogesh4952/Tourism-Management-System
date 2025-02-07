@@ -626,3 +626,70 @@ export const touristPlaces = [
     image: janakiTemple,
   },
 ];
+
+
+import yogesh from "./yogesh.jpeg"
+import safal from "./safal.jpeg"
+import sumit from "./sumit.jpeg"
+import aryan from  "./aryan.jpeg"
+
+export const teamMembers = [
+  {
+    name: 'Yogesh Shah',
+    role: 'Backend Developer',
+    image: yogesh,
+    github: ''
+  },
+  {
+    name: 'Safal Shyangwa',
+    role: 'frontend Developer',
+    image: safal,
+    github: ''
+  },
+  {
+    name: 'Sumit Maharjan',
+    role: 'CEO',
+    image: sumit,
+    github: ''
+  },
+  {
+    name: 'Aryan Saud',
+    role: 'Co-Founder',
+    image: aryan,
+    github: ''
+  }
+]
+
+
+export const testimonials = [
+  {
+    name: 'Rachel Adams',
+    role: 'Traveler',
+    image: 'https://randomuser.me/api/portraits/women/50.jpg',
+    review: 'My trip to Chitwan was unforgettable! The booking process was seamless, and the experience was beyond expectations.',
+    rating: 5,
+  },
+  {
+    name: 'Tom Harris',
+    role: 'Adventurer',
+    image: 'https://randomuser.me/api/portraits/men/27.jpg',
+    review: 'The customer support team was incredibly helpful in finding the perfect destination for my family vacation.',
+    rating: 4,
+  },
+  {
+    name: 'Olivia Brown',
+    role: 'Explorer',
+    image: 'https://randomuser.me/api/portraits/women/35.jpg',
+    review: 'I had a relaxing stay at the Beach Resort in Kathmandu. The site offers amazing options and deals.',
+    rating: 5,
+  },
+  {
+    name: 'Ethan White',
+    role: 'Holiday Planner',
+    image: 'https://randomuser.me/api/portraits/men/38.jpg',
+    review: 'The booking experience was straightforward and the destinations were stunning. I’ll definitely use this platform again!',
+    rating: 4,
+  },
+];
+
+

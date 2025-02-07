@@ -1,6 +1,4 @@
 import {
-  Routes,
-  Route,
   createBrowserRouter,
   RouterProvider,
 } from 'react-router';
@@ -45,7 +43,9 @@ const App = () => {
           element: <DestinationDetailPage />,
         },
         {
-          path: '/accomodation',
+
+          path: "/accommodation",
+
           element: <AccomodationPage />,
         },
         {

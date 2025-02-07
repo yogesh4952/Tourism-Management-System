@@ -2,65 +2,59 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
-const testimonials = [
-  {
-    name: "John Doe",
-    image: "https://via.placeholder.com/100",
-    rating: 5,
-    review: "The experience was absolutely amazing! The guide was knowledgeable and the hospitality was top-notch.",
-  },
-  {
-    name: "Sarah Smith",
-    image: "https://via.placeholder.com/100",
-    rating: 4,
-    review: "Beautiful destinations and very well-organized tours. Highly recommended!",
-  },
-  {
-    name: "Michael Brown",
-    image: "https://via.placeholder.com/100",
-    rating: 5,
-    review: "A truly unforgettable experience. Everything was seamless and enjoyable.",
-  },
-  {
-    name: "Emily Johnson",
-    image: "https://via.placeholder.com/100",
-    rating: 4,
-    review: "Great guides and excellent accommodations. Will definitely book again!",
-  },
-];
 
-const TestimonialPage = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-  };
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+import { testimonials } from '../assets/assets';
 
+const TestimonialSlider = () => {
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-800 text-white rounded-lg relative">
-      <h2 className="text-2xl font-bold text-center mb-4">What Our Guests Say</h2>
-      <div className="flex flex-col items-center text-center space-y-4">
-        <img src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} className="w-20 h-20 rounded-full border-2 border-gray-400" />
-        <h3 className="text-lg font-semibold">{testimonials[currentIndex].name}</h3>
-        <div className="flex">
-          {[...Array(5)].map((_, i) => (
-            <FaStar key={i} className={i < testimonials[currentIndex].rating ? "text-yellow-400" : "text-gray-500"} />
-          ))}
-        </div>
-        <p className="text-gray-300 italic">"{testimonials[currentIndex].review}"</p>
-      </div>
-      <button onClick={prevTestimonial} className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 p-2 rounded-full hover:bg-gray-600">
-        <MdArrowBack size={24} />
-      </button>
-      <button onClick={nextTestimonial} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white bg-gray-700 p-2 rounded-full hover:bg-gray-600">
-        <MdArrowForward size={24} />
-      </button>
+    <div className='w-full py-3'>
+      <h2 className='text-center text-3xl font-bold mb-6'>
+        What Our Users Say
+      </h2>
+
+      <Swiper
+        modules={[Pagination, Navigation, Autoplay]}
+        slidesPerView={1}
+        spaceBetween={20}
+        loop={true}
+        autoplay={{ delay: 3000 }}
+        pagination={{ clickable: true }}
+        navigation
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        className='w-11/12 mx-auto'
+      >
+        {testimonials.map((testimonial, index) => (
+          <SwiperSlide key={index} className='p-4'>
+            <div className=' p-6 rounded-xl shadow-lg text-center'>
+              <img
+                src={testimonial.image}
+                alt={testimonial.name}
+                className='w-20 h-20 rounded-full mx-auto mb-4 border-4'
+              />
+              <h3 className='text-xl font-semibold'>{testimonial.name}</h3>
+              <p className='bg-primary rounded-full'>{testimonial.role}</p>
+              <p className='mt-2  italic'>
+                "{testimonial.review}"
+              </p>
+              <div className='mt-2'>{'⭐'.repeat(testimonial.rating)}</div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
 
-export default TestimonialPage;
+export default TestimonialSlider;
