@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router';
+import Payment from './Payment';
 
 const HotelCard = ({ hotel }) => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const HotelCard = ({ hotel }) => {
         <div className='card-actions justify-end mt-4'>
           <button
             className='btn btn-primary'
-            onClick={() => navigate('/payment')}
+            onClick={() => navigate(`/payment/${hotel.id}`)}
           >
             Book Now
           </button>
