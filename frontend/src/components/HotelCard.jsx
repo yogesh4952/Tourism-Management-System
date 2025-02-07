@@ -35,7 +35,12 @@ const HotelCard = ({ hotel }) => {
 
         {/* Book Now Button */}
         <div className='card-actions justify-end mt-4'>
-          <button className='btn btn-primary'>Book Now</button>
+          <button
+            className='btn btn-primary'
+            onClick={() => navigate('/payment')}
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </div>

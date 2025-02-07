@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import CryptoJS from 'crypto-js';
 import { CreditCard, User, DollarSign } from 'lucide-react';
 
-const Payment = ({ hotel }) => {
+const Payment = ({}) => {
   const [formData, setformData] = useState({
     amount: '10',
     tax_amount: '0',
-    total_amount: hotel.price,
+    total_amount: '10',
     transaction_uuid: uuidv4(),
     product_service_charge: '0',
     product_delivery_charge: '0',
