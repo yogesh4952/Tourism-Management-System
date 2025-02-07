@@ -6,7 +6,7 @@ import HotelCard from '../components/HotelCard';
 
 const DestinationDetailPage = () => {
   const { placeId } = useParams();
-  const place = touristPlaces.find((place) => place.name === placeId);
+  const place = touristPlaces.find((place) => place.id.toString() === placeId.toString());
   const [coordinates, setCoordinates] = useState(null);
   const [nearbyHotels, setNearbyHotels] = useState([]);
 
@@ -59,7 +59,7 @@ const DestinationDetailPage = () => {
     return (
       <div className='text-center py-8'>
         <h2 className='text-xl font-bold'>Destination not found</h2>
-        <Link to='/destinations' className='mt-4 text-blue-500 underline'>
+        <Link to='/destination' className='mt-4 text-blue-500 underline'>
           Back to all destinations
         </Link>
       </div>

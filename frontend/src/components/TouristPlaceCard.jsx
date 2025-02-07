@@ -25,10 +25,10 @@ const TouristPlaceCard = ({ place }) => {
         <h2 className='card-title text-lg sm:text-xl font-semibold'>
           {place.name}
         </h2>
-        <p className='text-sm text-gray-500'>{place.location}</p>
+        <p className='text-sm text-gray-200'>{place.location}</p>
 
         {/* Truncated Description */}
-        <div className='text-sm text-gray-700'>
+        <div className='text-sm text-gray-300'>
           {place.description ? (
             <p>{truncateDescription(place.description, 150)}</p>
           ) : (
@@ -49,7 +49,7 @@ const TouristPlaceCard = ({ place }) => {
         <div className='card-actions justify-end mt-4'>
           <button
             className='btn bg-green-500 w-full'
-            onClick={() => navigate(`/destination-detail/${place.name}`)}
+            onClick={() => navigate(`/destination-detail/${place.id}`)}
           >
             Explore More
           </button>
