@@ -8,11 +8,10 @@ import {
   likeExperience,
 } from '../controllers/addExperience.controller.js';
 import { protectRoute } from '../middlewares/auth.middleware.js';
-import route from './auth.route.js';
 
 const router = express.Router();
 
-router.post('/add', protectRoute, addExperience);
+router.post('/add', addExperience);
 router.get('/', getAllExperiences);
 router.get('/:id', getExperienceById);
 router.put('/:id', updateExperience);
