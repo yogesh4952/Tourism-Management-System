@@ -29,7 +29,7 @@ const testimonials = [
   },
 ];
 
-const Testimonial = () => {
+const TestimonialPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextTestimonial = () => {
@@ -63,4 +63,4 @@ const Testimonial = () => {
   );
 };
 
-export default Testimonial;
+export default TestimonialPage;

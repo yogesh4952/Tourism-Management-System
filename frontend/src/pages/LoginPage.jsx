@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaUser, FaLock } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -44,15 +45,15 @@ export default function LoginPage() {
               className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
           </div>
-          <button className="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold py-2 rounded-lg shadow-lg transition-all">
+          <button className="w-full bg-blue-500 hover:bg-blue-400 text-gray-900 font-semibold py-2 rounded-lg shadow-lg transition-all">
             Login
           </button>
         </form>
         <p className="mt-4 text-center text-gray-400">
           Don't have an account?{" "}
-          <a href="#" className="text-yellow-400">
+          <NavLink to="/signup" className="text-blue-400">
             Sign up
-          </a>
+          </NavLink>
         </p>
       </div>
     </div>

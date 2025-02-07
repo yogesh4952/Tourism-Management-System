@@ -5,6 +5,10 @@ import { useState } from "react";
 import { MapPin, Menu, X } from "lucide-react"; // Importing the Menu and X icons
 import { NavLink } from "react-router-dom";
 
+import WhyChooseUsPage from "./WhyChooseUsPage";
+
+
+
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false); // Define state for mobile menu toggle
   
@@ -54,6 +58,10 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      {/* why choose us  */}
+      <div>
+        <WhyChooseUsPage />
+      </div>
 
       {/* Popular Destinations Section */}
       <section className="py-16 bg-gray-50 text-center">
@@ -82,6 +90,7 @@ const HomePage = () => {
           ))}
         </div>
       </section>
+ 
     </>
   );
 };

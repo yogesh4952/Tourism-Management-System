@@ -10,6 +10,7 @@ import Blog from './pages/Blog.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import GuidePage from './pages/GuidePage.jsx';
 import DestinationDetailPage from './pages/DestinationDetailPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
 const App = () => {
 
   const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const App = () => {
         {
           path:"/Guide",
           element:<GuidePage/>
+        },
+        {
+          path:'/signup',
+          element:<SignUpPage/>
         },
        
         {
