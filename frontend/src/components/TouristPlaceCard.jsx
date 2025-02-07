@@ -10,15 +10,19 @@ const TouristPlaceCard = ({ place }) => {
   };
 
   return (
-    <div className='card w-full sm:w-96 bg-base-100 shadow-xl'>
-      {/* Place Image */}
-      <figure>
-        <img
-          src={place.image}
-          alt={`Image of ${place.name}`}
-          className='h-48 w-full object-cover rounded-t-lg'
-        />
-      </figure>
+    <div className='card w-full sm:w-96 bg-base-100 shadow-xl overflow-hidden'>
+      {/* Place Image with Hover Effect */}
+      <div className='relative group'>
+        <figure className='overflow-hidden'>
+          <img
+            src={place.image}
+            alt={`Image of ${place.name}`}
+            className='h-48 w-full object-cover rounded-t-lg transform transition-transform duration-300 group-hover:scale-110'
+          />
+        </figure>
+        {/* Overlay effect on hover */}
+        <div className='absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300'></div>
+      </div>
 
       <div className='card-body'>
         {/* Place Name & Location */}

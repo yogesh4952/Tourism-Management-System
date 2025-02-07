@@ -8,9 +8,8 @@ import TouristPlaceCard from '../components/TouristPlaceCard';
 import TestimonialSlider from './TestimonalPage';
 import Button from '../components/Button';
 
-import WhyChooseUsPage from "./WhyChooseUsPage";
-
-
+import WhyChooseUsPage from './WhyChooseUsPage';
+import GetInTouch from '../components/GetInTouch';
 
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false); // Define state for mobile menu toggle
@@ -38,14 +37,10 @@ const HomePage = () => {
               hospitality.
             </p>
             <NavLink to='/destination'>
-
               <Button />
-
             </NavLink>
           </div>
         </div>
-
-
 
         <div>
           <WhyChooseUsPage />
@@ -78,7 +73,7 @@ const HomePage = () => {
       </div>
       {/* why choose us  */}
 
-
+      <GetInTouch />
 
       {/* Popular Destinations Section */}
       {/* <section className='py-16 bg-base-100 text-center'>

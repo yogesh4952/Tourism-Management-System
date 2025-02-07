@@ -27,10 +27,22 @@ const DestinationDetailPage = () => {
         })
         .catch((error) => console.error('Error fetching coordinates:', error));
 
-      // Mockup nearby hotels data (in a real case, fetch based on location)
-      setNearbyHotels(() =>
-        hotels.filter((hotel) => hotel.location === place.location)
-      );
+      // Filter hotels by matching location and sort:
+      // 1. Premium hotels on top.
+      // 2. Then by rating (descending).
+      setNearbyHotels(() => {
+        const filteredHotels = hotels.filter(
+          (hotel) => hotel.location === place.location
+        );
+        filteredHotels.sort((a, b) => {
+          // Premium hotels come first.
+          if (a.isPremium && !b.isPremium) return -1;
+          if (!a.isPremium && b.isPremium) return 1;
+          // If both have the same premium status, sort by rating descending.
+          return b.rating - a.rating;
+        });
+        return filteredHotels;
+      });
     }
   }, [place]);
 
@@ -111,7 +123,7 @@ const DestinationDetailPage = () => {
       <div className='mt-6 text-center'>
         <Link
           to='/destination'
-          className='btn bg-green-600 text-white hover:bg-green-700 px-6 py-2 rounded-lg shadow-md'
+          className='btn btn-primary px-6 py-2 rounded-lg shadow-md'
         >
           Back to All Destinations
         </Link>

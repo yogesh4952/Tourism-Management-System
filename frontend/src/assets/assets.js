@@ -17,31 +17,330 @@ import manakamana from './manakamana.jpg';
 import janakiTemple from './janakiTemple.jpg';
 import bardiaNationalPark from './BardiaNationalPark.jpeg';
 import patanDurbarSquare from './patanDurbarSquare.jpg';
+import { images } from '../assets/hotels/images';
 
 export const hotels = [
   // Province No. 1 - Everest, Ilam, Dharan
   {
     id: 1,
+    name: 'Summit Serenity Hotel',
+    location: 'Namche Bazaar, Province No. 1',
+    rating: 4.8,
+    price: 55000,
+    amenities: ['Stunning Everest Views', 'Gourmet Dining', 'Luxury Spa'],
+    image: images.hotel1,
+    description: `<p><strong>Summit Serenity Hotel</strong> offers breathtaking views of the Himalayas from its lofty perch in Namche Bazaar. Enjoy gourmet dining and relax in a luxurious spa after a day of adventure.</p>`,
+  },
+  {
+    id: 2,
+    name: 'Everest Peak Retreat',
+    location: 'Lukla, Province No. 1',
+    rating: 4.6,
+    price: 48000,
+    amenities: ['Adventure Packages', 'Trekking Guides', 'Comfortable Rooms'],
+    image: images.hotel2,
+    description: `<p><strong>Everest Peak Retreat</strong> is a haven for adventurers and trekkers. Located in Lukla, it provides easy access to Everest Base Camp while ensuring comfort with modern amenities.</p>`,
+  },
+  {
+    id: 3,
+    name: 'Highland Haven',
+    location: 'Dharan, Province No. 1',
+    rating: 4.4,
+    price: 32000,
+    amenities: ['City Views', 'Modern Facilities', 'Cultural Tours'],
+    image: images.hotel4,
+    description: `<p><strong>Highland Haven</strong> in Dharan combines urban comforts with cultural experiences, making it ideal for both leisure and business travelers.</p>`,
+  },
+  {
+    id: 4,
+    name: 'Aurora Mountain Lodge',
+    location: 'Ilam, Province No. 1',
+    rating: 4.7,
+    price: 40000,
+    amenities: ['Tea Garden Views', 'Eco-Friendly', 'Local Cuisine'],
+    image: images.hotel5,
+    description: `<p><strong>Aurora Mountain Lodge</strong> provides a serene escape in Ilam, surrounded by lush tea gardens. Guests enjoy eco-friendly accommodations and savor the best of local flavors.</p>`,
+  },
+
+  // Madhesh Province
+  {
+    id: 5,
+    name: 'Janakpur Heritage Inn',
+    location: 'Janakpur, Madhesh Province',
+    rating: 4.3,
+    price: 15000,
+    amenities: ['Cultural Heritage', 'Traditional Decor', 'Local Cuisine'],
+    image: images.hotel7,
+    description: `<p><strong>Janakpur Heritage Inn</strong> is immersed in the rich cultural tapestry of Janakpur. Enjoy traditional decor and authentic local meals that showcase the region’s heritage.</p>`,
+  },
+  {
+    id: 6,
+    name: 'Mithila Comfort Hotel',
+    location: 'Dhanusha, Madhesh Province',
+    rating: 4.2,
+    price: 13000,
+    amenities: ['Spacious Rooms', 'Family Friendly', 'Local Art'],
+    image: images.hotel3,
+    description: `<p><strong>Mithila Comfort Hotel</strong> offers a warm and welcoming atmosphere in Dhanusha with spacious rooms and decor inspired by traditional Mithila art.</p>`,
+  },
+  {
+    id: 7,
+    name: 'Madhesh Royal Retreat',
+    location: 'Birgunj, Madhesh Province',
+    rating: 4.5,
+    price: 18000,
+    amenities: ['Royal Ambiance', 'Fine Dining', 'Heritage Rooms'],
+    image: images.hotel2,
+    description: `<p><strong>Madhesh Royal Retreat</strong> delivers a regal experience in Birgunj with heritage-inspired rooms, fine dining, and an ambiance that exudes luxury.</p>`,
+  },
+  {
+    id: 8,
+    name: 'Janaki Comfort Lodge',
+    location: 'Janakpur, Madhesh Province',
+    rating: 4.0,
+    price: 11000,
+    amenities: ['Budget Friendly', 'Near Janaki Temple', 'Homely Ambiance'],
+    image: images.hotel6,
+    description: `<p><strong>Janaki Comfort Lodge</strong> is an affordable option in Janakpur, conveniently located near Janaki Temple, offering a cozy and homely environment for budget travelers.</p>`,
+  },
+
+  // Bagmati Province
+  {
+    id: 9,
+    name: 'Kathmandu Heritage Hotel',
+    location: 'Kathmandu, Bagmati Province',
+    rating: 4.7,
+    price: 25000,
+    amenities: ['Cultural Heritage', 'Modern Amenities', 'Central Location'],
+    image: images.hotel12,
+    description: `<p><strong>Kathmandu Heritage Hotel</strong> is a blend of tradition and modernity, centrally located in Kathmandu. It offers a glimpse of the city's rich culture alongside contemporary comforts.</p>`,
+  },
+  {
+    id: 10,
+    name: 'City Lights Inn',
+    location: 'Lalitpur, Bagmati Province',
+    rating: 4.5,
+    price: 22000,
+    amenities: ['Business Facilities', 'Cozy Rooms', 'Rooftop Cafe'],
+    image: images.hotel10,
+    description: `<p><strong>City Lights Inn</strong> in Lalitpur provides excellent business facilities and cozy accommodations, enhanced by a rooftop cafe with stunning city views.</p>`,
+  },
+  {
+    id: 11,
+    name: 'Nagarkot Sunrise Resort',
+    location: 'Nagarkot, Bagmati Province',
+    rating: 4.8,
+    price: 28000,
+    amenities: ['Panoramic Sunrise Views', 'Outdoor Terrace', 'Local Cuisine'],
+    image: images.hotel11,
+    description: `<p><strong>Nagarkot Sunrise Resort</strong> is renowned for its spectacular sunrise vistas over the Himalayas. Enjoy an outdoor terrace and indulge in local culinary delights.</p>`,
+  },
+  {
+    id: 12,
+    name: 'Royal Heritage Inn',
+    location: 'Bhaktapur, Bagmati Province',
+    rating: 4.4,
+    price: 2000,
+    image: images.hotel9,
+    amenities: ['Heritage Architecture', 'Cultural Experience', 'Garden View'],
+    description: `<p><strong>Royal Heritage Inn</strong> in Bhaktapur offers a unique cultural experience with its heritage architecture and tranquil garden views, merging history with modern luxury.</p>`,
+  },
+
+  // Gandaki Province
+  {
+    id: 13,
+    name: 'Lakeside Bliss Resort',
+    location: 'Pokhara, Gandaki Province',
+    rating: 4.9,
+    price: 1000,
+    image: images.hotel6,
+    amenities: ['Lake View', 'Boat Rides', 'Luxury Spa'],
+    description: `<p><strong>Lakeside Bliss Resort</strong> is a premier resort in Pokhara that offers stunning lake views, private boat rides, and a luxurious spa for the ultimate relaxation experience.</p>`,
+  },
+  {
+    id: 14,
+    name: "Annapurna Trekker's Lodge",
+    location: 'Annapurna, Gandaki Province',
+    rating: 4.6,
+    price: 15000,
+    amenities: ['Trekking Packages', 'Mountain View', 'Warm Hospitality'],
+    image: images.hotel6,
+    description: `<p><strong>Annapurna Trekker's Lodge</strong> caters to adventure enthusiasts with specially curated trekking packages and warm hospitality, providing an authentic mountain experience.</p>`,
+  },
+  {
+    id: 15,
+    name: 'Mountain Breeze Hotel',
+    location: 'Pokhara, Gandaki Province',
+    rating: 4.5,
+    price: 5000,
+    amenities: ['Breathtaking Views', 'Modern Rooms', 'Gourmet Dining'],
+    image: images.hotel10,
+    description: `<p><strong>Mountain Breeze Hotel</strong> in Pokhara offers modern rooms with breathtaking mountain views and gourmet dining that delights the senses.</p>`,
+  },
+  {
+    id: 16,
+    name: 'Serenity Hill Resort',
+    location: 'Annapurna, Gandaki Province',
+    rating: 4.7,
+    price: 3000,
+    amenities: ['Peaceful Environment', 'Hiking Trails', 'Eco-Friendly'],
+    image: images.hotel1,
+    description: `<p><strong>Serenity Hill Resort</strong> provides a peaceful escape in the Annapurna region with eco-friendly practices, scenic hiking trails, and a tranquil atmosphere.</p>`,
+  },
+
+  // Lumbini Province
+  {
+    id: 17,
+    name: "Buddha's Retreat Hotel",
+    location: 'Lumbini, Lumbini Province',
+    rating: 4.6,
+    price: 19000,
+    amenities: ['Meditation Zone', 'Serene Gardens', 'Cultural Tours'],
+    image: images.hotel2,
+    description: `<p><strong>Buddha's Retreat Hotel</strong> in Lumbini offers a serene environment perfect for meditation and cultural exploration, complete with lush gardens and guided tours.</p>`,
+  },
+  {
+    id: 18,
+    name: 'Palpa Heritage Inn',
+    location: 'Palpa, Lumbini Province',
+    rating: 4.3,
+    price: 14000,
+    amenities: ['Historical Ambiance', 'Hilltop View', 'Local Delicacies'],
+    image: images.hotel3,
+    description: `<p><strong>Palpa Heritage Inn</strong> provides a historical ambiance with hilltop views and delicious local delicacies that capture the essence of Palpa.</p>`,
+  },
+  {
+    id: 19,
+    name: 'Lumbini Tranquility Lodge',
+    location: 'Lumbini, Lumbini Province',
+    rating: 4.5,
+    price: 16000,
+    amenities: ['Quiet Environment', 'Spa Services', 'Organic Meals'],
+    image: images.hotel4,
+    description: `<p><strong>Lumbini Tranquility Lodge</strong> offers a quiet retreat in Lumbini with rejuvenating spa services and organic meals to refresh both mind and body.</p>`,
+  },
+  {
+    id: 20,
+    name: 'Maya Devi Resort',
+    location: 'Lumbini, Lumbini Province',
+    rating: 4.8,
+    price: 21000,
+    amenities: ['Near Maya Devi Temple', 'Luxury Rooms', 'Zen Garden'],
+    image: images.hotel8,
+    description: `<p><strong>Maya Devi Resort</strong> offers a luxurious stay near the sacred Maya Devi Temple, featuring opulent rooms and a zen garden that creates a serene escape.</p>`,
+  },
+
+  // Karnali Province
+  {
+    id: 21,
+    name: 'Rara Serenity Lodge',
+    location: 'Rara, Karnali Province',
+    rating: 4.7,
+    price: 23000,
+    amenities: ['Lakeside Retreat', 'Boating', 'Fishing'],
+    image: images.hotel8,
+    description: `<p><strong>Rara Serenity Lodge</strong> offers a tranquil lakeside retreat in the Rara region with boating and fishing activities, providing a unique outdoor experience.</p>`,
+  },
+  {
+    id: 22,
+    name: 'Phoksundo Wilderness Resort',
+    location: 'Phoksundo, Karnali Province',
+    rating: 4.8,
+    price: 25000,
+    amenities: ['Wilderness Experience', 'Eco-Tours', 'Local Cuisine'],
+    image: images.hotel9,
+    description: `<p><strong>Phoksundo Wilderness Resort</strong> immerses guests in the raw beauty of nature with eco-tours and local cuisine that celebrates the wilderness of Phoksundo.</p>`,
+  },
+  {
+    id: 23,
+    name: 'Karnali Adventure Inn',
+    location: 'Karnali, Karnali Province',
+    rating: 4.4,
+    price: 18000,
+    amenities: ['Adventure Sports', 'Guided Trekking', 'Riverside Camping'],
+    image: images.hotel7,
+    description: `<p><strong>Karnali Adventure Inn</strong> is designed for thrill-seekers, offering adventure sports, guided trekking, and riverside camping in the rugged terrains of Karnali.</p>`,
+  },
+  {
+    id: 24,
+    name: 'Highland Karnali Retreat',
+    location: 'Karnali, Karnali Province',
+    rating: 4.5,
+    price: 21000,
+    amenities: ['Scenic Views', 'Comfortable Stay', 'Cultural Evenings'],
+    image: images.hotel5,
+    description: `<p><strong>Highland Karnali Retreat</strong> provides scenic views and a comfortable stay, enhanced by cultural evenings that offer a taste of local traditions.</p>`,
+  },
+
+  // Sudurpashchim Province
+  {
+    id: 25,
+    name: 'Khaptad Horizon Hotel',
+    location: 'Khaptad, Sudurpashchim Province',
+    rating: 4.6,
+    price: 20000,
+    amenities: ['Mountain Views', 'Nature Walks', 'Local Cuisine'],
+    image: images.hotel1,
+    description: `<p><strong>Khaptad Horizon Hotel</strong> offers stunning mountain views and invigorating nature walks in the Khaptad region, complemented by delightful local cuisine.</p>`,
+  },
+  {
+    id: 26,
+    name: 'Shuklaphanta Nature Retreat',
+    location: 'Shuklaphanta, Sudurpashchim Province',
+    rating: 4.7,
+    price: 22000,
+    amenities: ['Jungle Safari', 'Bird Watching', 'Luxury Tent Stay'],
+    image: images.hotel3,
+    description: `<p><strong>Shuklaphanta Nature Retreat</strong> invites guests to experience the vibrant ecosystem of Shuklaphanta with exciting jungle safaris, bird watching, and luxurious tent accommodations.</p>`,
+  },
+  {
+    id: 27,
+    name: 'Sudurpashchim Heritage Inn',
+    location: 'Sudurpashchim, Sudurpashchim Province',
+    rating: 4.3,
+    price: 17000,
+    amenities: [
+      'Cultural Heritage',
+      'Historic Architecture',
+      'Traditional Meals',
+    ],
+    image: images.hotel6,
+    description: `<p><strong>Sudurpashchim Heritage Inn</strong> provides an immersive cultural experience with historic architecture and traditional meals that celebrate the local heritage.</p>`,
+  },
+  {
+    id: 28,
+    name: 'Western Frontier Lodge',
+    location: 'Sudurpashchim, Sudurpashchim Province',
+    rating: 4.4,
+    price: 19000,
+    amenities: ['Adventure Activities', 'River Rafting', 'Local Festivals'],
+    image: images.hotel8,
+    description: `<p><strong>Western Frontier Lodge</strong> offers an adventurous escape in the heart of Sudurpashchim, where guests can enjoy river rafting, immerse in local festivals, and experience vibrant outdoor activities.</p>`,
+  },
+  {
+    id: 29,
     name: 'Hotel Everest View',
     location: 'Everest, Province No. 1',
     rating: 5.0,
     price: 50000,
     amenities: ['Panoramic Everest View', 'Luxury Rooms', 'Fine Dining'],
     image: everestHotel,
+    description: `<p><strong>Hotel Everest View</strong> offers a breathtaking panoramic view of Everest, paired with luxurious amenities tailored for high-end travelers. Enjoy exquisite fine dining and impeccable service in one of Nepal's most scenic locations.</p>`,
   },
   {
-    id: 2,
+    id: 30,
     name: 'Greenhill Resort',
     location: 'Ilam, Province No. 1',
     rating: 4.5,
     price: 12000,
     amenities: ['Tea Garden Views', 'Eco-Friendly', 'Free Breakfast'],
     image: greenHillResort,
+    description: `<p><strong>Greenhill Resort</strong> is nestled in the lush tea gardens of Ilam. Its eco-friendly practices and warm hospitality make it a perfect retreat for nature lovers seeking tranquility and comfort.</p>`,
   },
 
   // Madhesh Province - Janakpur, Parsa
   {
-    id: 3,
+    id: 31,
     name: 'Rama Palace Hotel',
     location: 'Janakpur, Madhesh Province',
     rating: 4.3,
@@ -52,115 +351,127 @@ export const hotels = [
       'Restaurant',
     ],
     image: ramaPalaceHotel,
+    description: `<p><strong>Rama Palace Hotel</strong> provides a blend of traditional Maithili decor and modern comfort, located near the revered Janaki Temple. Guests enjoy authentic local cuisine and a culturally rich ambiance.</p>`,
   },
   {
-    id: 4,
+    id: 32,
     name: 'Parsa Jungle Lodge',
     location: 'Parsa National Park, Madhesh Province',
     rating: 4.6,
     price: 18000,
     amenities: ['Wildlife Safari', 'Luxury Tent Stay', 'Campfire Nights'],
     image: parsJungleLodge,
+    description: `<p><strong>Parsa Jungle Lodge</strong> offers an adventurous stay on the edge of Parsa National Park. Enjoy luxury tent accommodations, exciting wildlife safaris, and memorable campfire nights under the stars.</p>`,
   },
 
   // Bagmati Province - Kathmandu, Nagarkot
   {
-    id: 5,
+    id: 33,
     name: 'Hotel Yak & Yeti',
     location: 'Kathmandu, Bagmati Province',
     rating: 4.5,
     price: 20000,
     amenities: ['Spa', 'Fine Dining', 'Business Lounge'],
     image: yakYetiHotel,
+    description: `<p><strong>Hotel Yak & Yeti</strong> in Kathmandu combines traditional Nepali hospitality with modern luxury. Guests can enjoy rejuvenating spa treatments, fine dining experiences, and a well-equipped business lounge.</p>`,
   },
   {
-    id: 6,
+    id: 34,
     name: 'Nagarkot Country Villa',
     location: 'Nagarkot, Bagmati Province',
     rating: 4.7,
     price: 15000,
     amenities: ['Panoramic Mountain View', 'Sunrise Point', 'Local Cuisine'],
     image: 'https://i.imgur.com/8nHcdeO.jpg',
+    description: `<p><strong>Nagarkot Country Villa</strong> is a charming retreat in Nagarkot, offering panoramic mountain views and a serene sunrise point. Savor the flavors of local cuisine in a cozy, nature-inspired setting.</p>`,
   },
 
   // Gandaki Province - Pokhara, Annapurna
   {
-    id: 7,
+    id: 35,
     name: 'Fishtail Lodge',
     location: 'Pokhara, Gandaki Province',
     rating: 4.9,
     price: 25000,
     amenities: ['Lake View', 'Private Boating', 'Luxury Spa'],
     image: 'https://i.imgur.com/rzSy4xU.jpg',
+    description: `<p><strong>Fishtail Lodge</strong> in Pokhara offers an opulent lakeside experience with private boating facilities and a luxury spa. Revel in the tranquility of the lake and the comfort of modern amenities.</p>`,
   },
   {
-    id: 8,
+    id: 36,
     name: 'Annapurna Base Camp Lodge',
     location: 'Annapurna, Gandaki Province',
     rating: 4.5,
     price: 10000,
     amenities: ['Trekking Lodge', 'Mountain View', 'Hot Showers'],
     image: 'https://i.imgur.com/GXdOQJm.jpg',
+    description: `<p><strong>Annapurna Base Camp Lodge</strong> caters to trekkers with essential comforts after a long day on the trails. Enjoy stunning mountain views and the simple pleasure of a hot shower in a rustic setting.</p>`,
   },
 
   // Lumbini Province - Lumbini, Palpa
   {
-    id: 9,
+    id: 37,
     name: 'Lumbini Buddha Garden Resort',
     location: 'Lumbini, Lumbini Province',
     rating: 4.6,
     price: 12000,
     amenities: ['Near Maya Devi Temple', 'Meditation Zone', 'Peaceful Retreat'],
     image: 'https://i.imgur.com/YFovX8M.jpg',
+    description: `<p><strong>Lumbini Buddha Garden Resort</strong> provides a peaceful retreat near the sacred Maya Devi Temple. Enjoy a dedicated meditation zone and a tranquil atmosphere designed to soothe the mind and spirit.</p>`,
   },
   {
-    id: 10,
+    id: 38,
     name: 'Hotel Srinagar Palpa',
     location: 'Palpa, Lumbini Province',
     rating: 4.2,
     price: 8000,
     amenities: ['Traditional Newari Architecture', 'Hilltop View'],
     image: 'https://i.imgur.com/wIXu1Eq.jpg',
+    description: `<p><strong>Hotel Srinagar Palpa</strong> features a charming blend of traditional Newari architecture and modern comforts, offering guests sweeping hilltop views and an authentic cultural experience in Palpa.</p>`,
   },
 
   // Karnali Province - Rara, Phoksundo
   {
-    id: 11,
+    id: 39,
     name: 'Rara Lake Resort',
     location: 'Rara Lake, Karnali Province',
     rating: 4.8,
     price: 22000,
     amenities: ['Lakeside Stay', 'Canoeing', 'Fishing'],
     image: 'https://i.imgur.com/YOpeY0D.jpg',
+    description: `<p><strong>Rara Lake Resort</strong> offers a serene lakeside experience at Rara Lake, with activities like canoeing and fishing, making it an ideal getaway for nature and adventure enthusiasts.</p>`,
   },
   {
-    id: 12,
+    id: 40,
     name: 'Phoksundo Eco Lodge',
     location: 'Shey Phoksundo, Karnali Province',
     rating: 4.7,
     price: 18000,
     amenities: ['Eco Stay', 'Guided Trekking', 'Organic Meals'],
     image: 'https://i.imgur.com/HW1V1KR.jpg',
+    description: `<p><strong>Phoksundo Eco Lodge</strong> emphasizes an eco-friendly stay with guided trekking adventures and organic meals, allowing guests to experience the pristine wilderness of Phoksundo in comfort.</p>`,
   },
 
   // Sudurpashchim Province - Khaptad, Shuklaphanta
   {
-    id: 13,
+    id: 41,
     name: 'Khaptad Adventure Camp',
     location: 'Khaptad National Park, Sudurpashchim Province',
     rating: 4.6,
     price: 14000,
     amenities: ['Camping Experience', 'Nature Walks', 'Bonfire'],
     image: 'https://i.imgur.com/ECl7c0M.jpg',
+    description: `<p><strong>Khaptad Adventure Camp</strong> offers an immersive camping experience in Khaptad National Park, complete with guided nature walks and cozy bonfire evenings under the stars.</p>`,
   },
   {
-    id: 14,
+    id: 42,
     name: 'Shuklaphanta Safari Lodge',
     location: 'Shuklaphanta National Park, Sudurpashchim Province',
     rating: 4.5,
     price: 17000,
     amenities: ['Jungle Safari', 'Bird Watching', 'Luxury Stay'],
     image: 'https://i.imgur.com/ZV9b70h.jpg',
+    description: `<p><strong>Shuklaphanta Safari Lodge</strong> in Shuklaphanta National Park features exciting jungle safaris, bird watching tours, and a luxury stay that combines adventure with comfort.</p>`,
   },
 ];
 
@@ -627,69 +938,69 @@ export const touristPlaces = [
   },
 ];
 
-
-import yogesh from "./yogesh.jpeg"
-import safal from "./safal.jpeg"
-import sumit from "./sumit.jpeg"
-import aryan from  "./aryan.jpeg"
+import yogesh from './yogesh.jpeg';
+import safal from './safal.jpeg';
+import sumit from './sumit.jpeg';
+import aryan from './aryan.jpeg';
 
 export const teamMembers = [
   {
     name: 'Yogesh Shah',
     role: 'Backend Developer',
     image: yogesh,
-    github: ''
+    github: '',
   },
   {
     name: 'Safal Shyangwa',
     role: 'frontend Developer',
     image: safal,
-    github: ''
+    github: '',
   },
   {
     name: 'Sumit Maharjan',
     role: 'CEO',
     image: sumit,
-    github: ''
+    github: '',
   },
   {
     name: 'Aryan Saud',
     role: 'Co-Founder',
     image: aryan,
-    github: ''
-  }
-]
-
+    github: '',
+  },
+];
 
 export const testimonials = [
   {
     name: 'Rachel Adams',
     role: 'Traveler',
     image: 'https://randomuser.me/api/portraits/women/50.jpg',
-    review: 'My trip to Chitwan was unforgettable! The booking process was seamless, and the experience was beyond expectations.',
+    review:
+      'My trip to Chitwan was unforgettable! The booking process was seamless, and the experience was beyond expectations.',
     rating: 5,
   },
   {
     name: 'Tom Harris',
     role: 'Adventurer',
     image: 'https://randomuser.me/api/portraits/men/27.jpg',
-    review: 'The customer support team was incredibly helpful in finding the perfect destination for my family vacation.',
+    review:
+      'The customer support team was incredibly helpful in finding the perfect destination for my family vacation.',
     rating: 4,
   },
   {
     name: 'Olivia Brown',
     role: 'Explorer',
     image: 'https://randomuser.me/api/portraits/women/35.jpg',
-    review: 'I had a relaxing stay at the Beach Resort in Kathmandu. The site offers amazing options and deals.',
+    review:
+      'I had a relaxing stay at the Beach Resort in Kathmandu. The site offers amazing options and deals.',
     rating: 5,
   },
   {
     name: 'Ethan White',
     role: 'Holiday Planner',
     image: 'https://randomuser.me/api/portraits/men/38.jpg',
-    review: 'The booking experience was straightforward and the destinations were stunning. I’ll definitely use this platform again!',
+    review:
+      'The booking experience was straightforward and the destinations were stunning. I’ll definitely use this platform again!',
     rating: 4,
   },
 ];
-
-
