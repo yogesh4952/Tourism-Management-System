@@ -7,6 +7,7 @@ import './instrument.js';
 import userRoute from './routes/auth.route.js';
 import destinationRoute from './routes/destination_hotel.route.js';
 import premiumRoute from './routes/premium.route.js';
+import './cronJobs.js'; // Import the cron job file to activate it
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use('/api/auth', userRoute);
 app.use('/api/premium', premiumRoute);
 app.use('/api/destination', destinationRoute);
+
 // Basic route
 app.get('/', (req, res) => {
   res.send('I am alive');

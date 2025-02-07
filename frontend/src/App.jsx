@@ -1,3 +1,4 @@
+
 import { Routes, Route, createBrowserRouter, RouterProvider } from 'react-router';
 import AboutPage from './pages/AboutPage.jsx'
 import HomePage from './pages/HomePage.jsx';
@@ -8,6 +9,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import Blog from './pages/Blog.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import GuidePage from './pages/GuidePage.jsx';
+import DestinationDetailPage from './pages/DestinationDetailPage.jsx';
 const App = () => {
 
   const router = createBrowserRouter([
@@ -33,6 +35,10 @@ const App = () => {
           path: "/Destination",
           element: <DestinationPage />,
 
+        },
+        {
+ path: "/destination-detail/:placeId",
+          element: <DestinationDetailPage />,
         },
         {
           path: "/accomodation",
