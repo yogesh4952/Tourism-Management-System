@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import CryptoJS from 'crypto-js';
 import { CreditCard, User, DollarSign } from 'lucide-react';
+import { useParams } from 'react-router';
+import { hotels } from '../assets/assets';
 
-const Payment = ({}) => {
+const Payment = () => {
+  const { hotelId } = useParams();
+
+  const hotel = hotels.find((hotel) => hotel.id.toString() === hotelId);
   const [formData, setformData] = useState({
-    amount: '10',
+    amount: hotel?.price || '1000',
     tax_amount: '0',
-    total_amount: '10',
+    total_amount: hotel?.price,
     transaction_uuid: uuidv4(),
     product_service_charge: '0',
     product_delivery_charge: '0',

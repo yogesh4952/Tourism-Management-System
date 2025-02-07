@@ -58,7 +58,7 @@ const App = () => {
         },
 
         {
-          path: '/payment',
+          path: '/payment/:hotelId',
           element: <Payment />,
         },
 

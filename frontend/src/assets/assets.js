@@ -15,12 +15,13 @@ import RaraLake from './raraLake.jpeg';
 import Gaisokunda from './Gaisokunda.jpeg';
 import manakamana from './manakamana.jpg';
 import janakiTemple from './janakiTemple.jpg';
-import bardiaNationalPark from "./BardiaNationalPark.jpeg"
-import patanDurbarSquare from "./patanDurbarSquare.jpg"
+import bardiaNationalPark from './BardiaNationalPark.jpeg';
+import patanDurbarSquare from './patanDurbarSquare.jpg';
 
 export const hotels = [
   // Province No. 1 - Everest, Ilam, Dharan
   {
+    id: 1,
     name: 'Hotel Everest View',
     location: 'Everest, Province No. 1',
     rating: 5.0,
@@ -29,6 +30,7 @@ export const hotels = [
     image: everestHotel,
   },
   {
+    id: 2,
     name: 'Greenhill Resort',
     location: 'Ilam, Province No. 1',
     rating: 4.5,
@@ -39,6 +41,7 @@ export const hotels = [
 
   // Madhesh Province - Janakpur, Parsa
   {
+    id: 3,
     name: 'Rama Palace Hotel',
     location: 'Janakpur, Madhesh Province',
     rating: 4.3,
@@ -51,6 +54,7 @@ export const hotels = [
     image: ramaPalaceHotel,
   },
   {
+    id: 4,
     name: 'Parsa Jungle Lodge',
     location: 'Parsa National Park, Madhesh Province',
     rating: 4.6,
@@ -61,6 +65,7 @@ export const hotels = [
 
   // Bagmati Province - Kathmandu, Nagarkot
   {
+    id: 5,
     name: 'Hotel Yak & Yeti',
     location: 'Kathmandu, Bagmati Province',
     rating: 4.5,
@@ -69,6 +74,7 @@ export const hotels = [
     image: yakYetiHotel,
   },
   {
+    id: 6,
     name: 'Nagarkot Country Villa',
     location: 'Nagarkot, Bagmati Province',
     rating: 4.7,
@@ -79,6 +85,7 @@ export const hotels = [
 
   // Gandaki Province - Pokhara, Annapurna
   {
+    id: 7,
     name: 'Fishtail Lodge',
     location: 'Pokhara, Gandaki Province',
     rating: 4.9,
@@ -87,6 +94,7 @@ export const hotels = [
     image: 'https://i.imgur.com/rzSy4xU.jpg',
   },
   {
+    id: 8,
     name: 'Annapurna Base Camp Lodge',
     location: 'Annapurna, Gandaki Province',
     rating: 4.5,
@@ -97,6 +105,7 @@ export const hotels = [
 
   // Lumbini Province - Lumbini, Palpa
   {
+    id: 9,
     name: 'Lumbini Buddha Garden Resort',
     location: 'Lumbini, Lumbini Province',
     rating: 4.6,
@@ -105,6 +114,7 @@ export const hotels = [
     image: 'https://i.imgur.com/YFovX8M.jpg',
   },
   {
+    id: 10,
     name: 'Hotel Srinagar Palpa',
     location: 'Palpa, Lumbini Province',
     rating: 4.2,
@@ -115,6 +125,7 @@ export const hotels = [
 
   // Karnali Province - Rara, Phoksundo
   {
+    id: 11,
     name: 'Rara Lake Resort',
     location: 'Rara Lake, Karnali Province',
     rating: 4.8,
@@ -123,6 +134,7 @@ export const hotels = [
     image: 'https://i.imgur.com/YOpeY0D.jpg',
   },
   {
+    id: 12,
     name: 'Phoksundo Eco Lodge',
     location: 'Shey Phoksundo, Karnali Province',
     rating: 4.7,
@@ -133,6 +145,7 @@ export const hotels = [
 
   // Sudurpashchim Province - Khaptad, Shuklaphanta
   {
+    id: 13,
     name: 'Khaptad Adventure Camp',
     location: 'Khaptad National Park, Sudurpashchim Province',
     rating: 4.6,
@@ -141,6 +154,7 @@ export const hotels = [
     image: 'https://i.imgur.com/ECl7c0M.jpg',
   },
   {
+    id: 14,
     name: 'Shuklaphanta Safari Lodge',
     location: 'Shuklaphanta National Park, Sudurpashchim Province',
     rating: 4.5,
