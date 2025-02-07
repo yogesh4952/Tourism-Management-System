@@ -5,15 +5,18 @@ import {
   getExperienceById,
   updateExperience,
   deleteExperience,
+  likeExperience,
 } from '../controllers/addExperience.controller.js';
 import { protectRoute } from '../middlewares/auth.middleware.js';
+import route from './auth.route.js';
 
 const router = express.Router();
 
 router.post('/add', protectRoute, addExperience);
-router.get('/', protectRoute, getAllExperiences);
-router.get('/:id', protectRoute, getExperienceById);
-router.put('/:id', protectRoute, updateExperience);
-router.delete('/:id', protectRoute, deleteExperience);
+router.get('/', getAllExperiences);
+router.get('/:id', getExperienceById);
+router.put('/:id', updateExperience);
+router.delete('/:id', deleteExperience);
+router.post('/like/:id', likeExperience);
 
 export default router;
