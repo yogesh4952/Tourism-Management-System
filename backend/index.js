@@ -5,7 +5,7 @@ import connectDB from './DB/db.js';
 import * as Sentry from '@sentry/node';
 import './instrument.js';
 import userRoute from './routes/auth.route.js';
-import destinationRoute from './routes/destination_hotel.route.js';
+import destinationRoute from './routes/destination.route.js';
 import premiumRoute from './routes/premium.route.js';
 import './cronJobs.js'; // Import the cron job file to activate it
 
