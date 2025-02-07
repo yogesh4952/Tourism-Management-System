@@ -41,7 +41,7 @@ const App = () => {
           element: <DestinationDetailPage />,
         },
         {
-          path: "/accomodation",
+          path: "/accommodation",
           element: <AccomodationPage />,
         },
         {

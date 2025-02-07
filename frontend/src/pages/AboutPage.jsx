@@ -1,42 +1,8 @@
 'use client';
 
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import {  FaGithub } from 'react-icons/fa';
 
-const teamMembers = [
-  {
-    name: 'John Doe',
-    role: 'Founder & CEO',
-    image: 'https://via.placeholder.com/150',
-    social: {
-      facebook: '#',
-      twitter: '#',
-      instagram: '#',
-      linkedin: '#',
-    },
-  },
-  {
-    name: 'Jane Smith',
-    role: 'Head of Operations',
-    image: 'https://via.placeholder.com/150',
-    social: {
-      facebook: '#',
-      twitter: '#',
-      instagram: '#',
-      linkedin: '#',
-    },
-  },
-  {
-    name: 'Robert Brown',
-    role: 'Marketing Manager',
-    image: 'https://via.placeholder.com/150',
-    social: {
-      facebook: '#',
-      twitter: '#',
-      instagram: '#',
-      linkedin: '#',
-    },
-  },
-];
+import { teamMembers } from '../assets/assets';
 
 const AboutPage = () => {
   return (
@@ -54,9 +20,7 @@ const AboutPage = () => {
 
       {/* Mission & Vision */}
       <section className='py-16 px-6 text-center'>
-        <h2 className='text-4xl font-extrabold'>
-          Our Mission & Vision
-        </h2>
+        <h2 className='text-4xl font-extrabold'>Our Mission & Vision</h2>
         <p className='text-lg mt-4 max-w-3xl mx-auto'>
           We are dedicated to providing unforgettable travel experiences by
           offering top-notch hospitality and customized tourism services. Our
@@ -79,38 +43,17 @@ const AboutPage = () => {
               <img
                 src={member.image}
                 alt={member.name}
-                className='w-32 h-32 rounded-full mx-auto mb-4 border-4 border-yellow-500'
+                className='w-32 h-32 rounded-full mx-auto mb-4 border-4 border-primary'
               />
               <h3 className='text-2xl font-semibold'>{member.name}</h3>
               <p className=' text-lg mb-4'>{member.role}</p>
               <div className='flex justify-center gap-4 '>
                 <a
-                  href={member.social.facebook}
+                  href={member.github}
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  <FaFacebook size={24} />
-                </a>
-                <a
-                  href={member.social.twitter}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <FaTwitter size={24} />
-                </a>
-                <a
-                  href={member.social.instagram}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <FaInstagram size={24} />
-                </a>
-                <a
-                  href={member.social.linkedin}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <FaLinkedin size={24} />
+                  <FaGithub size={24} />
                 </a>
               </div>
             </div>
@@ -126,8 +69,9 @@ const AboutPage = () => {
           help make your travel experience extraordinary.
         </p>
         <a
-          href='mailto:info@tourism.com'
-          className=' btn btn-primary btn- shadow-lg hover:bg-primary transition duration-200'
+          href='mailto:info.nepal'
+          target='_blank'
+          className=' btn btn-outline btn-secondary mt-2'
         >
           Contact Us
         </a>
