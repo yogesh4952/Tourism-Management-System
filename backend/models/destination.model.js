@@ -1,5 +1,8 @@
+import mongoose from 'mongoose';
+
 const destinationSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  district: { type: String, required: true },
   description: { type: String, required: true },
   images: [{ type: String }],
   activities: [{ type: String }], // Example: ["Paragliding", "Rafting"]
