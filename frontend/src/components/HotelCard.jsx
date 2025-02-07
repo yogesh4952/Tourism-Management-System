@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router';
 import { FaStar, FaCheckCircle } from 'react-icons/fa';
+import { useUser, SignIn } from '@clerk/clerk-react';
 
 const HotelCard = ({ hotel }) => {
   const navigate = useNavigate();
+  const { isSignedIn } = useUser();
 
   return (
     <div className='card w-full sm:w-96 bg-base-100 shadow-xl overflow-hidden'>
@@ -59,8 +61,12 @@ const HotelCard = ({ hotel }) => {
             Detail
           </button>
           <button
-            className='btn btn-primary '
-            onClick={() => navigate(`/payment/${hotel.id}`)}
+            className={`btn btn-primary ${!isSignedIn && 'cursor-not-allowed'}`}
+            onClick={() => {
+              navigate(`/payment/${hotel.id}`);
+              SignIn();
+            }}
+            disabled={!isSignedIn}
           >
             Book Now
           </button>

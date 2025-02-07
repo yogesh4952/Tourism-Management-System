@@ -5,7 +5,7 @@ const Button = () => {
   return (
     <StyledWrapper>
       <button className='cta'>
-        <span className='hover-underline-animation'> Explore  </span>
+        <span className='hover-underline-animation'> Explore </span>
         <svg
           id='arrow-horizontal'
           xmlns='http://www.w3.org/2000/svg'
@@ -27,39 +27,42 @@ const Button = () => {
 
 const StyledWrapper = styled.div`
   .cta {
-    border: none;
-    background: none;
+    border: 2px solid black;
+    background: black;
+    color: white;
     cursor: pointer;
-  }
-
-  .cta span {
-    padding-bottom: 7px;
-    letter-spacing: 4px;
-    font-size: 14px;
-    padding-right: 15px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
   }
 
-  .cta svg {
-    transform: translateX(-8px);
-    transition: all 0.3s ease;
+  .cta:hover {
+    background: transparent;
+    color: black;
   }
 
   .cta:hover svg {
-    transform: translateX(0);
+    fill: black;
+    transform: translateX(4px);
   }
 
-  .cta:active svg {
-    transform: scale(0.9);
+  .cta:active {
+    transform: scale(0.96);
   }
 
   .hover-underline-animation {
     position: relative;
-    color: black;
-    padding-bottom: 20px;
+    padding-bottom: 4px;
   }
 
-  .hover-underline-animation:after {
+  .hover-underline-animation::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -67,13 +70,20 @@ const StyledWrapper = styled.div`
     height: 2px;
     bottom: 0;
     left: 0;
+    background-color: white;
     transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+    transition: transform 0.3s ease-out;
   }
 
-  .cta:hover .hover-underline-animation:after {
+  .cta:hover .hover-underline-animation::after {
+    background-color: black;
     transform: scaleX(1);
     transform-origin: bottom left;
+  }
+
+  .cta svg {
+    transition: transform 0.3s ease, fill 0.3s ease;
+    fill: white;
   }
 `;
 

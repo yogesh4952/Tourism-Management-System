@@ -1,13 +1,10 @@
-'use client';
-
-import { useState } from 'react';
-import { MapPin } from 'lucide-react'; // Importing the MapPin icon
+import { useState } from 'react'; // Importing the MapPin icon
 import { NavLink } from 'react-router-dom';
 import { touristPlaces } from '../assets/assets';
 import TouristPlaceCard from '../components/TouristPlaceCard';
 import TestimonialSlider from './TestimonalPage';
 import Button from '../components/Button';
-
+import { Typewriter } from 'react-simple-typewriter';
 import WhyChooseUsPage from './WhyChooseUsPage';
 import GetInTouch from '../components/GetInTouch';
 
@@ -28,15 +25,27 @@ const HomePage = () => {
             alt='Hero Background'
             className='absolute inset-0 w-full h-full object-cover opacity-95'
           />
-          <div className='text-center relative z-10'>
+          <div className='text-center relative z-10 flex flex-col items-center justify-center '>
             <h1 className='text-5xl font-bold mb-4'>
-              Explore the World with Us
+              <Typewriter
+                words={[
+                  'Explore Nepal with Us',
+                  'Your Adventure Awaits',
+                  'Discover the Best Destinations',
+                ]}
+                loop={true}
+                cursor
+                cursorStyle='|'
+                typeSpeed={80}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
             </h1>
             <p className='text-xl mb-8'>
               Your journey begins here. Discover the best in tourism and
               hospitality.
             </p>
-            <NavLink to='/destination'>
+            <NavLink to='/destination' className='self-center'>
               <Button />
             </NavLink>
           </div>
@@ -74,49 +83,6 @@ const HomePage = () => {
       {/* why choose us  */}
 
       <GetInTouch />
-
-      {/* Popular Destinations Section */}
-      {/* <section className='py-16 bg-base-100 text-center'>
-        <h2 className='text-4xl font-extrabold text-base-content'>
-          Popular Destinations
-        </h2>
-        <p className='text-lg text-base-content/70 mt-2'>
-          Explore our most beloved locations
-        </p>
-        <div className='mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-16'>
-          {destinations.map((destination, index) => (
-            <div
-              key={index}
-              className='card bg-white shadow-xl hover:scale-105 transform transition duration-300 ease-in-out'
-            >
-              <figure>
-                <img
-                  src={destination.image}
-                  alt={destination.title}
-                  className='w-full h-64 object-cover rounded-t-lg'
-                />
-              </figure>
-              <div className='card-body'>
-                <h3 className='text-2xl font-semibold text-base-content'>
-                  {destination.title}
-                </h3>
-                <p className='text-base-content flex items-center gap-2 mt-2'>
-                  <MapPin className='w-5 h-5 text-yellow-500' />
-                  {destination.location}
-                </p>
-                <p className='text-xl font-bold text-yellow-600 mt-4'>
-                  From {destination.price} / night
-                </p>
-                <NavLink to='/booking'>
-                  <button className='btn btn-yellow w-full mt-4'>
-                    Book Now
-                  </button>
-                </NavLink>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section> */}
     </>
   );
 };

@@ -49,7 +49,7 @@
 //           >
 //             {/* Guide Image */}
 //             <img src={guide.image} alt={guide.name} className="w-24 h-24 mx-auto rounded-full border-4 border-gray-700" />
-            
+
 //             {/* Guide Details */}
 //             <h3 className="text-xl font-semibold mt-4">{guide.name}</h3>
 //             <p className="text-lg mt-1 opacity-75">{guide.expertise} Guide</p>
@@ -76,115 +76,125 @@
 // };
 
 // export default GuidePage;
-import { useState } from "react";
-import { User, Briefcase, MapPin, Languages, DollarSign, PhoneCall, Mail, Filter } from "lucide-react";
-import jhon from '../Images/person1.jpg';
- import emily from '../Images/person2.jpg';
- import carlos from '../Images/person3.jpg';
- import sophia from '../Images/person4.jpg';
- import David from '../Images/person5.jpg';
-  import sumit from '../Images/5.jpg';
+import { useState } from 'react';
+import {
+  User,
+  Briefcase,
+  MapPin,
+  Languages,
+  DollarSign,
+  PhoneCall,
+  Mail,
+  Filter,
+} from 'lucide-react';
+import sangam from '../Images/person1.jpg';
+import bikash from '../Images/person2.jpg';
+import ram from '../Images/person3.jpg';
+import sita from '../Images/person4.jpg';
+import kiran from '../Images/person5.jpg';
+import pema from '../Images/5.jpg';
 
 const guides = [
   {
     id: 1,
-    name: "John Smith",
-    expertise: "Adventure",
-    experience: "10+ years",
-    location: "Alaska",
-    languages: "English, Spanish",
-    price: "$150/day",
-    contact: "+1 555-123-4567",
-    email: "john.adventure@example.com",
-    image: jhon,
-    category: "Adventure",
+    name: 'Ram Thapa',
+    expertise: 'Trekking & Adventure',
+    experience: '12 years',
+    location: 'Everest Region',
+    languages: 'Nepali, English',
+    price: 'Rs. 5000/day',
+    contact: '+977 9801234567',
+    email: 'ram.trekking@example.com',
+    image: ram,
+    category: 'Adventure',
   },
   {
     id: 2,
-    name: "Emily Davis",
-    expertise: "Cultural Tours",
-    experience: "8 years",
-    location: "Japan",
-    languages: "English, Japanese",
-    price: "$180/day",
-    contact: "+81 555-234-5678",
-    email: "emily.culture@example.com",
-    image: sumit,
-    category: "Culture",
+    name: 'Sita Gurung',
+    expertise: 'Cultural & Heritage Tours',
+    experience: '10 years',
+    location: 'Kathmandu Valley',
+    languages: 'Nepali, English, Newari',
+    price: 'Rs. 3000/day',
+    contact: '+977 9812345678',
+    email: 'sita.culture@example.com',
+    image: sita,
+    category: 'Culture',
   },
   {
     id: 3,
-    name: "Carlos Mendoza",
-    expertise: "Wildlife",
-    experience: "12 years",
-    location: "Amazon",
-    languages: "Portuguese, Spanish",
-    price: "$200/day",
-    contact: "+55 555-345-6789",
-    email: "carlos.wildlife@example.com",
-    image: David,
-    category: "Wildlife",
+    name: 'Kiran Lama',
+    expertise: 'Wildlife & Nature',
+    experience: '8 years',
+    location: 'Chitwan National Park',
+    languages: 'Nepali, English',
+    price: 'Rs. 4000/day',
+    contact: '+977 9823456789',
+    email: 'kiran.wildlife@example.com',
+    image: kiran,
+    category: 'Wildlife',
   },
   {
     id: 4,
-    name: "Sophia lama",
-    expertise: "Luxury Travel",
-    experience: "15 years",
-    location: "France",
-    languages: "French, English",
-    price: "$250/day",
-    contact: "+33 555-456-7890",
-    email: "sophia.luxury@example.com",
-    image: sophia,
-    category: "Luxury",
+    name: 'Pema Sherpa',
+    expertise: 'Luxury & Helicopter Tours',
+    experience: '15 years',
+    location: 'Everest Base Camp',
+    languages: 'Nepali, English, Tibetan',
+    price: 'Rs. 15000/day',
+    contact: '+977 9845678901',
+    email: 'pema.luxury@example.com',
+    image: pema,
+    category: 'Luxury',
   },
   {
     id: 5,
-    name: "Ramesh Sharma",
-    expertise: "Hiking",
-    experience: "9 years",
-    location: "Nepal",
-    languages: "English, Hindi",
-    price: "$120/day",
-    contact: "+977 555-567-8901",
-    email: "david.hiking@example.com",
-    image: carlos,
-    category: "Adventure",
+    name: 'Bikash Tamang',
+    expertise: 'Hiking & Offbeat Trails',
+    experience: '7 years',
+    location: 'Langtang Region',
+    languages: 'Nepali, English, Tamang',
+    price: 'Rs. 3500/day',
+    contact: '+977 9856789012',
+    email: 'bikash.hiking@example.com',
+    image: bikash,
+    category: 'Adventure',
   },
   {
-    id: 5,
-    name: "Sangam shrestha",
-    expertise: "Hiking",
-    experience: "9 years",
-    location: "Nepal",
-    languages: "English, Hindi",
-    price: "$120/day",
-    contact: "+977 555-567-8901",
-    email: "david.hiking@example.com",
-    image: sumit,
-    category: "Adventure",
+    id: 6,
+    name: 'Sangam Shrestha',
+    expertise: 'Hiking & Trekking',
+    experience: '9 years',
+    location: 'Annapurna Circuit',
+    languages: 'Nepali, English',
+    price: 'Rs. 4500/day',
+    contact: '+977 9867890123',
+    email: 'sangam.hiking@example.com',
+    image: sangam,
+    category: 'Adventure',
   },
 ];
 
-const categories = ["All", "Adventure", "Culture", "Wildlife", "Luxury"];
+const categories = ['All', 'Adventure', 'Culture', 'Wildlife', 'Luxury'];
 
 const GuidePage = () => {
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState('All');
 
-  const filteredGuides = filter === "All" ? guides : guides.filter((guide) => guide.category === filter);
+  const filteredGuides =
+    filter === 'All'
+      ? guides
+      : guides.filter((guide) => guide.category === filter);
 
   return (
-    <section className="bg-gray-900 text-white py-12 px-6">
-     
+    <section className=' py-12 px-6'>
       {/* Filter Buttons */}
-      <div className="flex justify-center gap-4 mb-8 flex-wrap">
+      <div className='flex justify-center gap-4 mb-8 flex-wrap'>
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setFilter(category)}
-            className={`px-5 py-2 rounded-full border transition text-sm font-semibold flex items-center gap-2 ${
-              filter === category ? "bg-gray-700 text-white" : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-            }`}
+            className={`px-5 py-2 rounded-full border transition text-sm font-semibold flex items-center gap-2 
+`}
           >
             <Filter size={16} /> {category}
           </button>
@@ -192,51 +202,55 @@ const GuidePage = () => {
       </div>
 
       {/* Guide List */}
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto'>
         {filteredGuides.map((guide) => (
           <div
             key={guide.id}
-            className="bg-gray-800 p-6 rounded-2xl shadow-lg text-center transition transform hover:scale-105 hover:shadow-2xl"
+            className=' p-6 rounded-2xl shadow-lg text-center transition transform hover:scale-105 hover:shadow-2xl'
           >
             {/* Guide Image */}
-            <img src={guide.image} alt={guide.name} className="w-24 h-24 mx-auto rounded-full border-4 border-gray-700" />
+            <img
+              src={guide.image}
+              alt={guide.name}
+              className='w-24 h-24 mx-auto rounded-full border-4 border-gray-700'
+            />
 
             {/* Guide Info */}
-            <h3 className="text-xl font-semibold mt-4 flex items-center justify-center gap-2">
+            <h3 className='text-xl font-semibold mt-4 flex items-center justify-center gap-2'>
               <User size={20} /> {guide.name}
             </h3>
 
-            <p className="text-lg mt-1 flex items-center justify-center gap-2 opacity-75">
+            <p className='text-lg mt-1 flex items-center justify-center gap-2 opacity-75'>
               <Briefcase size={18} /> {guide.expertise} Guide
             </p>
 
-            <p className="text-sm flex items-center justify-center gap-2 opacity-50">
+            <p className='text-sm flex items-center justify-center gap-2 opacity-50'>
               <MapPin size={18} /> {guide.location}
             </p>
 
-            <p className="text-sm flex items-center justify-center gap-2 mt-1">
+            <p className='text-sm flex items-center justify-center gap-2 mt-1'>
               <Languages size={18} /> {guide.languages}
             </p>
 
-            <p className="text-sm flex items-center justify-center gap-2 mt-1">
+            <p className='text-sm flex items-center justify-center gap-2 mt-1'>
               <Briefcase size={18} /> {guide.experience} Experience
             </p>
 
-            <p className="text-lg font-semibold flex items-center justify-center gap-2 text-green-400 mt-2">
-              <DollarSign size={18} /> {guide.price}
+            <p className='text-lg font-semibold flex items-center justify-center gap-2 text-green-400 mt-2'>
+              {guide.price}
             </p>
 
             {/* Contact Buttons */}
-            <div className="mt-4 flex justify-center gap-4">
+            <div className='mt-4 flex justify-center gap-4'>
               <a
                 href={`tel:${guide.contact}`}
-                className="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-green-600"
+                className='bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-green-600'
               >
                 <PhoneCall size={16} /> Call
               </a>
               <a
                 href={`mailto:${guide.email}`}
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600"
+                className='bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-600'
               >
                 <Mail size={16} /> Email
               </a>

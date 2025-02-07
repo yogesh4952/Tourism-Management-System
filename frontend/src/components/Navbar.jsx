@@ -2,9 +2,17 @@ import { useState, useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import {
+  useUser,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+} from '@clerk/clerk-react';
+import Logo from '../Icon/Logo';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isSignedIn } = useUser();
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -15,9 +23,8 @@ export default function Navbar() {
     { path: '/accommodation', label: 'Accommodation' },
     { path: '/destination', label: 'Destinations' },
     { path: '/blog', label: 'Blog' },
-    { path: '/about', label: 'About Us' },
     { path: '/guide', label: 'Guide' },
-    { path: '/login', label: 'Login', className: 'btn btn-primary' },
+    { path: '/about', label: 'About Us' },
   ];
 
   return (
@@ -25,24 +32,38 @@ export default function Navbar() {
       <div className='container mx-auto flex justify-between items-center'>
         {/* Logo */}
         <NavLink to='/' className='text-3xl font-extrabold tracking-wide'>
-          TravelX
+          <Logo />
         </NavLink>
 
         {/* Desktop Menu */}
         <div className='hidden md:flex space-x-6 text-lg items-center'>
-          {navLinks.map(({ path, label, className }) => (
+          {navLinks.map(({ path, label }) => (
             <NavLink
               key={path}
               to={path}
               className={({ isActive }) =>
                 `hover:text-primary transition duration-300 ${
                   isActive ? 'text-primary font-bold' : ''
-                } ${className || ''}`
+                }`
               }
             >
               {label}
             </NavLink>
           ))}
+
+          {/* Auth Buttons */}
+          {isSignedIn ? (
+            <>
+              <UserButton afterSignOutUrl='/' />
+              <SignOutButton>
+                <button className='btn btn-primary'>Sign Out</button>
+              </SignOutButton>
+            </>
+          ) : (
+            <SignInButton mode='modal'>
+              <button className='btn btn-primary'>Sign In</button>
+            </SignInButton>
+          )}
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -61,20 +82,34 @@ export default function Navbar() {
       {isOpen && (
         <div className='md:hidden absolute top-16 left-0 w-full bg-base-100 shadow-md'>
           <div className='flex flex-col items-center space-y-4 p-4'>
-            {navLinks.map(({ path, label, className }) => (
+            {navLinks.map(({ path, label }) => (
               <NavLink
                 key={path}
                 to={path}
                 className={({ isActive }) =>
                   `hover:text-primary transition duration-300 ${
                     isActive ? 'text-primary font-bold' : ''
-                  } ${className || ''}`
+                  }`
                 }
                 onClick={() => setIsOpen(false)}
               >
                 {label}
               </NavLink>
             ))}
+
+            {/* Mobile Auth Buttons */}
+            {isSignedIn ? (
+              <>
+                <UserButton afterSignOutUrl='/' />
+                <SignOutButton>
+                  <button className='btn btn-primary'>Sign Out</button>
+                </SignOutButton>
+              </>
+            ) : (
+              <SignInButton mode='modal'>
+                <button className='btn btn-primary'>Sign In</button>
+              </SignInButton>
+            )}
           </div>
         </div>
       )}

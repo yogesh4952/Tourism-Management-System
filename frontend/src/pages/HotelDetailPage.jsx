@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { hotels } from '../assets/assets';
 import MapComponent from '../components/MapComponent';
+import { useUser } from '@clerk/clerk-react';
 
 const HotelDetailPage = () => {
   const navigate = useNavigate();
+  const { isSignedIn } = useUser();
   const { hotelId } = useParams();
   const hotel = hotels.find((h) => h.id.toString() === hotelId);
   const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null });
@@ -82,8 +84,10 @@ const HotelDetailPage = () => {
 
       {/* Booking Button */}
       <div className='mt-8 flex justify-center w-[200px]'>
-        <button className='px-6 py-3  text-lg font-semibold rounded-lg btn btn-primary transition duration-300 w-full'
+        <button className={`px-6 py-3  text-lg font-semibold rounded-lg btn btn-primary transition duration-300 w-full ${!isSignedIn ? 'cursor-not-allowed' : ''}`}
+
         onClick={() => navigate(`/payment/${hotel.id}`)}
+        disabled={!isSignedIn}
         >
           Book Now
         </button>
