@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AboutPage from './pages/AboutPage.jsx';
+import CreateBlog from './pages/CreateBlog.jsx';
 import HomePage from './pages/HomePage.jsx';
 import DestinationPage from './pages/DestinationPage.jsx';
 import Applayout from './components/Applayout.jsx';
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: '/payment-success', element: <PaymentSuccess /> },
       { path: '/payment-failure', element: <PaymentFailure /> },
       { path: '/hotel/:hotelId', element: <HotelDetailPage /> },
+      { path: '/create-blog', element: <CreateBlog /> },
       { path: '/*', element: <ErrorPage /> },
     ],
   },
