@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router';
+
 const HotelCard = ({ hotel }) => {
+  const navigate = useNavigate();
   return (
     <div className='card w-full sm:w-96 bg-base-100 shadow-xl'>
       {/* Hotel Image */}
@@ -20,9 +23,7 @@ const HotelCard = ({ hotel }) => {
           <div className='flex items-center gap-1 text-yellow-500'>
             ⭐ {hotel.rating} / 5
           </div>
-          <div className='text-lg font-bold'>
-            Rs. {hotel.price} / night
-          </div>
+          <div className='text-lg font-bold'>Rs. {hotel.price} / night</div>
         </div>
 
         {/* Amenities */}
@@ -36,7 +37,12 @@ const HotelCard = ({ hotel }) => {
 
         {/* Book Now Button */}
         <div className='card-actions justify-end mt-4'>
-          <button className='btn bg-green-500'>Book Now</button>
+          <button
+            className='btn bg-green-500'
+            onClick={() => navigate('/payment')}
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </div>
