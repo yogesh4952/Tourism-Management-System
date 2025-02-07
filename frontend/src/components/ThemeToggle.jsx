@@ -12,7 +12,7 @@ export const ThemeToggle = () => {
   return (
     <button
       className={`border border-gray-300 rounded-full p-1 ${
-        theme === 'light' ? 'bg-white  ' : 'bg-gray-800 border-gray-700'
+        theme === 'light' ? 'bg-gray-300  ' : 'bg-gray-800 border-gray-700'
       }`}
       aria-label='Toggle Theme'
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}

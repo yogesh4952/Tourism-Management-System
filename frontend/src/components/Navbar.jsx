@@ -1,37 +1,83 @@
-
-import { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useState, useCallback } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-
-
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleMenu = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/accommodation', label: 'Accommodation' },
+    { path: '/destination', label: 'Destinations' },
+    { path: '/blog', label: 'Blog' },
+    { path: '/about', label: 'About Us' },
+    { path: '/guide', label: 'Guide' },
+    { path: '/login', label: 'Login', className: 'btn btn-primary' },
+  ];
+
   return (
-    <>
-      <nav className="bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-md p-4  w-full  z-50">
-        <div className="container mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <NavLink to="/" className="text-3xl font-extrabold text-gray-100 tracking-wide">
-            TravelX
-          </NavLink>
+    <nav className='shadow-md p-4 w-full z-50 bg-base-100'>
+      <div className='container mx-auto flex justify-between items-center'>
+        {/* Logo */}
+        <NavLink to='/' className='text-3xl font-extrabold tracking-wide'>
+          TravelX
+        </NavLink>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 text-lg items-center">
-            <NavLink className="hover:text-gray-300 transition duration-300" to="/">Home</NavLink>
-            <NavLink className="hover:text-gray-300 transition duration-300" to="/accommodation">Accommodation</NavLink>
-            <NavLink className="hover:text-gray-300 transition duration-300" to="/destination">Destinations</NavLink>
-            <NavLink className="hover:text-gray-300 transition duration-300" to="/Blog">Blog</NavLink>
-            <NavLink className="hover:text-gray-300 transition duration-300" to="/about">About Us</NavLink>
-            <NavLink className="hover:text-gray-300 transition duration-300" to="/Guide">Guide</NavLink>
+        {/* Desktop Menu */}
+        <div className='hidden md:flex space-x-6 text-lg items-center'>
+          {navLinks.map(({ path, label, className }) => (
+            <NavLink
+              key={path}
+              to={path}
+              className={({ isActive }) =>
+                `hover:text-primary transition duration-300 ${
+                  isActive ? 'text-primary font-bold' : ''
+                } ${className || ''}`
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </div>
 
-            <NavLink className="hover:text-gray-300 transition duration-300 btn btn-primary" to="/login">Login</NavLink>
+        {/* Mobile Menu Toggle */}
+        <button
+          className='md:hidden text-primary'
+          onClick={toggleMenu}
+          aria-label='Toggle Menu'
+        >
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        <ThemeToggle />
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className='md:hidden absolute top-16 left-0 w-full bg-base-100 shadow-md'>
+          <div className='flex flex-col items-center space-y-4 p-4'>
+            {navLinks.map(({ path, label, className }) => (
+              <NavLink
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  `hover:text-primary transition duration-300 ${
+                    isActive ? 'text-primary font-bold' : ''
+                  } ${className || ''}`
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                {label}
+              </NavLink>
+            ))}
           </div>
-          </div>
-
-        </nav>
-    </>
-    
+        </div>
+      )}
+    </nav>
   );
 }

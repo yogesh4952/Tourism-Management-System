@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const TouristPlaceCard = ({ place }) => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const TouristPlaceCard = ({ place }) => {
       <figure>
         <img
           src={place.image}
-          alt={place.name}
+          alt={`Image of ${place.name}`}
           className='h-48 w-full object-cover rounded-t-lg'
         />
       </figure>
@@ -25,10 +25,10 @@ const TouristPlaceCard = ({ place }) => {
         <h2 className='card-title text-lg sm:text-xl font-semibold'>
           {place.name}
         </h2>
-        <p className='text-sm text-gray-200'>{place.location}</p>
+        <p className='text-sm text-base-content/70'>{place.location}</p>
 
         {/* Truncated Description */}
-        <div className='text-sm text-gray-300'>
+        <div className='text-sm text-base-content/50'>
           {place.description ? (
             <p>{truncateDescription(place.description, 150)}</p>
           ) : (
@@ -39,7 +39,7 @@ const TouristPlaceCard = ({ place }) => {
         {/* Attractions */}
         <div className='flex flex-wrap gap-2 mt-2'>
           {place.attractions.map((attraction, index) => (
-            <span key={index} className='badge badge-outline px-2 py-1 text-sm'>
+            <span key={index} className='badge badge-primary text-sm'>
               {attraction}
             </span>
           ))}
@@ -48,7 +48,7 @@ const TouristPlaceCard = ({ place }) => {
         {/* Explore Button */}
         <div className='card-actions justify-end mt-4'>
           <button
-            className='btn bg-green-500 w-full'
+            className='btn btn-primary w-full'
             onClick={() => navigate(`/destination-detail/${place.id}`)}
           >
             Explore More

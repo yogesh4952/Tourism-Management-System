@@ -1,12 +1,14 @@
 import { useParams, Link } from 'react-router';
 import { useEffect, useState } from 'react';
-import { touristPlaces } from '../assets/assets'; // Ensure this path is correct
+import { hotels, touristPlaces } from '../assets/assets'; // Ensure this path is correct
 import MapComponent from '../components/MapComponent';
 import HotelCard from '../components/HotelCard';
 
 const DestinationDetailPage = () => {
   const { placeId } = useParams();
-  const place = touristPlaces.find((place) => place.id.toString() === placeId.toString());
+  const place = touristPlaces.find(
+    (place) => place.id.toString() === placeId.toString()
+  );
   const [coordinates, setCoordinates] = useState(null);
   const [nearbyHotels, setNearbyHotels] = useState([]);
 
@@ -26,32 +28,9 @@ const DestinationDetailPage = () => {
         .catch((error) => console.error('Error fetching coordinates:', error));
 
       // Mockup nearby hotels data (in a real case, fetch based on location)
-      setNearbyHotels([
-        {
-          name: 'Hotel A',
-          location: 'Near the beach',
-          rating: 4.5,
-          price: 3500,
-          amenities: ['Free Wi-Fi', 'Pool', 'Restaurant'],
-          image: 'https://via.placeholder.com/300',
-        },
-        {
-          name: 'Hotel B',
-          location: 'Mountain view',
-          rating: 4.7,
-          price: 5000,
-          amenities: ['Free Wi-Fi', 'Gym', 'Bar'],
-          image: 'https://via.placeholder.com/300',
-        },
-        {
-          name: 'Hotel C',
-          location: 'City center',
-          rating: 4.2,
-          price: 2200,
-          amenities: ['Free Parking', 'Spa', 'Restaurant'],
-          image: 'https://via.placeholder.com/300',
-        },
-      ]);
+      setNearbyHotels(() =>
+        hotels.filter((hotel) => hotel.location === place.location)
+      );
     }
   }, [place]);
 
@@ -85,8 +64,9 @@ const DestinationDetailPage = () => {
       </div>
 
       {/* Description */}
-      <div dangerouslySetInnerHTML={{__html: place.description}}
-      className='description-container mt-6'
+      <div
+        dangerouslySetInnerHTML={{ __html: place.description }}
+        className='description-container mt-6'
       ></div>
 
       {/* Nearby Attractions */}

@@ -1,6 +1,10 @@
-
-import { Routes, Route, createBrowserRouter, RouterProvider } from 'react-router';
-import AboutPage from './pages/AboutPage.jsx'
+import {
+  Routes,
+  Route,
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router';
+import AboutPage from './pages/AboutPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import DestinationPage from './pages/DestinationPage.jsx';
 import Applayout from './components/Applayout.jsx';
@@ -11,66 +15,76 @@ import ErrorPage from './pages/ErrorPage.jsx';
 import GuidePage from './pages/GuidePage.jsx';
 import DestinationDetailPage from './pages/DestinationDetailPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
+import Payment from './components/Payment.jsx';
+import PaymentSuccess from './pages/PaymentSuccess.jsx';
+import PaymentFailure from './pages/PaymentFailure.jsx';
 const App = () => {
-
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Applayout />,
       children: [
         {
-
-          path: "/",
+          path: '/',
           element: <HomePage />,
-
         },
         {
-          path: "/about",
+          path: '/about',
           element: <AboutPage />,
         },
         {
-          path: "/Blog",
+          path: '/Blog',
           element: <Blog />,
         },
         {
-          path: "/Destination",
+          path: '/Destination',
           element: <DestinationPage />,
-
         },
         {
- path: "/destination-detail/:placeId",
+          path: '/destination-detail/:placeId',
           element: <DestinationDetailPage />,
         },
         {
-          path: "/accomodation",
+          path: '/accomodation',
           element: <AccomodationPage />,
         },
         {
-          path:"/Guide",
-          element:<GuidePage/>
+          path: '/Guide',
+          element: <GuidePage />,
         },
         {
           path:'/signup',
           element:<SignUpPage/>
         },
        
+
         {
-          path: "/login",
+          path: '/login',
           element: <LoginPage />,
         },
-{
-  path:'/*',
-  element:<ErrorPage/>
-},
 
-      ]
+        {
+          path: '/payment',
+          element: <Payment />,
+        },
 
+        {
+          path: '/payment-success',
+          element: <PaymentSuccess />,
+        },
 
+        {
+          path: '/payment-failure',
+          element: <PaymentFailure />,
+        },
 
-
-    }
+        {
+          path: '/*',
+          element: <ErrorPage />,
+        },
+      ],
+    },
   ]);
   return <RouterProvider router={router} />;
-
 };
 export default App;
