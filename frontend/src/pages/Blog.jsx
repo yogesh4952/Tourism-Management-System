@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import useBlogStore from '../store/blogStore';
 import { Link } from 'react-router-dom'; // Import Link
+import Heart from '../Icon/Heart';
 
 const Blog = () => {
   const {
@@ -64,7 +65,8 @@ const Blog = () => {
                         className='btn btn-primary rounded-full'
                         onClick={() => handleLike(item._id)}
                       >
-                        <Hea></Hea>Like
+                        <Heart />
+                        Like
                       </button>
                       <span>
                         <i className='fas fa-thumbs-up mr-1'></i>
@@ -85,7 +87,7 @@ const Blog = () => {
             {/* Always show the "Post a Blog" button */}
             <Link
               to='/create-blog'
-              className='btn btn-primary mt-4 block text-center'
+              className='btn btn-primary mt-4 w-full text-2xl'
             >
               Post a Blog
             </Link>
