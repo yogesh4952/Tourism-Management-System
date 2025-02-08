@@ -61,10 +61,10 @@ const Blog = () => {
                     </p>
                     <div className='flex justify-between items-center mt-4'>
                       <button
-                        className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition-colors duration-200'
+                        className='btn btn-primary rounded-full'
                         onClick={() => handleLike(item._id)}
                       >
-                        <i className='fas fa-heart mr-2'></i>Like
+                        <Hea></Hea>Like
                       </button>
                       <span>
                         <i className='fas fa-thumbs-up mr-1'></i>
