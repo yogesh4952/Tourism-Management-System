@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { useLanguageContext } from '../context/LanguageContext';
 
 const Button = () => {
+  const { language } = useLanguageContext();
+
+  // Translations
+  const buttonText = {
+    en: 'Explore',
+    ne: 'अन्वेषण गर्नुहोस्',
+  };
+
   return (
     <StyledWrapper>
       <button className='cta'>
-        <span className='hover-underline-animation'> Explore </span>
+        <span className='hover-underline-animation'>
+          {buttonText[language]}
+        </span>
         <svg
           id='arrow-horizontal'
           xmlns='http://www.w3.org/2000/svg'
@@ -25,6 +36,7 @@ const Button = () => {
   );
 };
 
+// Keep all your existing styled components
 const StyledWrapper = styled.div`
   .cta {
     border: 2px solid black;

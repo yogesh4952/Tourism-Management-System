@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 import AboutPage from './pages/AboutPage.jsx';
 import CreateBlog from './pages/CreateBlog.jsx';
 import HomePage from './pages/HomePage.jsx';
@@ -16,7 +15,7 @@ import PaymentSuccess from './pages/PaymentSuccess.jsx';
 import PaymentFailure from './pages/PaymentFailure.jsx';
 import AccommodationPage from './pages/AccomodationPage.jsx';
 import HotelDetailPage from './pages/HotelDetailPage.jsx';
-import CreateBlog from './pages/CreateBlog.jsx';
+import PremiumSection from './pages/PremiumPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -39,15 +38,15 @@ const router = createBrowserRouter([
       { path: '/payment-success', element: <PaymentSuccess /> },
       { path: '/payment-failure', element: <PaymentFailure /> },
       { path: '/hotel/:hotelId', element: <HotelDetailPage /> },
+      { path: '/premium', element: <PremiumSection /> },
       { path: '/create-blog', element: <CreateBlog /> },
       { path: '/*', element: <ErrorPage /> },
     ],
   },
 ]);
 
-function App() {
 const App = () => {
   return <RouterProvider router={router} />;
-}
+};
 
 export default App;
