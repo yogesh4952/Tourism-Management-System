@@ -20,6 +20,7 @@ import PremiumSection from './pages/PremiumPage.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
+    
     element: <Applayout />,
     children: [
       { path: '/', element: <HomePage /> },
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router}/>;
 };
 
 export default App;

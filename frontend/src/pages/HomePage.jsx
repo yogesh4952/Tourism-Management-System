@@ -8,10 +8,14 @@ import { Typewriter } from 'react-simple-typewriter';
 import WhyChooseUsPage from './WhyChooseUsPage';
 import GetInTouch from '../components/GetInTouch';
 import { useLanguageContext } from '../context/LanguageContext';
+import Chatbot from './ChatBot';
+import useStore from '../context/ChatStore';
 
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { language } = useLanguageContext();
+  const [showChatbot, setShowChatbot] = useState(false); // Chatbot visibility toggle
+  const {setChatBotStatus,chatBotStatus}  = useStore();
 
   const popularDestinations = touristPlaces.filter((place) => place.id < 7);
 
@@ -29,6 +33,7 @@ const HomePage = () => {
       destinationsSubtext: 'Explore our most beloved locations',
       viewAll: 'View All Destinations',
       testimonialTitle: 'What Our Travelers Say',
+      chatButton: 'Chat with Us',
     },
     ne: {
       typewriter: [
@@ -42,14 +47,15 @@ const HomePage = () => {
       destinationsSubtext: 'हाम्रा प्रिय स्थानहरू अन्वेषण गर्नुहोस्',
       viewAll: 'सबै गन्तव्यहरू हेर्नुहोस्',
       testimonialTitle: 'हाम्रा यात्रुहरू के भन्छन्',
+      chatButton: 'हाम्रो संग कुराकानी गर्नुहोस्',
     },
   };
 
   return (
     <>
-      <div className='bg-base-200 text-base-content font-sans'>
+      <div className='text-base-content font-sans relative'>
         {/* Hero Section */}
-        <div className='relative h-screen flex items-center justify-center bg-base-300'>
+        <div className='relative h-screen flex items-center justify-center'>
           <img
             src='https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'
             alt='Hero Background'
@@ -67,15 +73,29 @@ const HomePage = () => {
                 delaySpeed={1000}
               />
             </h1>
-            <p className='text-xl mb-8'>
-              {translations[language].heroSubtitle}
-            </p>
+            <p className='text-xl mb-8'>{translations[language].heroSubtitle}</p>
             <NavLink to='/destination' className='self-center'>
               <Button />
             </NavLink>
           </div>
         </div>
 
+        {/* Chatbot Toggle Button */}
+        <button
+          onClick={() => setChatBotStatus(!showChatbot)}
+          className={`fixed bottom-6 right-6 px-4 py-2 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:bg-blue-700 transition ${chatBotStatus?"hidden":""}` }
+        >
+          {translations[language].chatButton}
+        </button>
+
+        {/* Conditionally Render Chatbot */}
+        {chatBotStatus && (
+          <div className='fixed bottom-16 right-6 z-50'>
+            <Chatbot />
+          </div>
+        )}
+
+        {/* Why Choose Us Section */}
         <div>
           <WhyChooseUsPage />
         </div>
@@ -101,6 +121,7 @@ const HomePage = () => {
           </NavLink>
         </section>
 
+        {/* Testimonials Section */}
         <div className='py-16 bg-base-200 text-center'>
           <h2 className='text-4xl font-extrabold mb-8'>
             {translations[language].testimonialTitle}
@@ -109,6 +130,7 @@ const HomePage = () => {
         </div>
       </div>
 
+      {/* Get In Touch Section */}
       <GetInTouch />
     </>
   );
