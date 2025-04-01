@@ -1,5 +1,4 @@
 import express from 'express';
-import { protectRoute } from '../middlewares/auth.middleware.js';
 import {
   checkIsPremium,
   getPremiumHotelById,
@@ -7,23 +6,24 @@ import {
   upgradeToPremium,
 } from '../controllers/premium.controller.js';
 import checkPremiumStatus from '../middlewares/checkPremiumStatus.middleware.js';
+import { authMiddleware } from '../middlewares/auth.js';
 
 const route = express.Router();
 
-route.post('/check-premium', protectRoute, checkPremiumStatus, checkIsPremium);
+route.post('/check-premium', authMiddleware, checkPremiumStatus, checkIsPremium);
 
-route.post('/upgrade-premium', protectRoute, upgradeToPremium);
+route.post('/upgrade-premium', authMiddleware, upgradeToPremium);
 
 route.get(
   '/get-premium-hotels',
-  protectRoute,
+  authMiddleware,
   checkPremiumStatus,
   getPremiumHotels
 );
 
 route.get(
   '/get-premium-hotel/:id',
-  protectRoute,
+  authMiddleware,
   checkPremiumStatus,
   getPremiumHotelById
 );

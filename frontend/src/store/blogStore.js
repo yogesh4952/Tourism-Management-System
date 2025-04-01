@@ -1,13 +1,13 @@
 import { create } from 'zustand';
-import axiosInstance from '../lib/axios';
+import axiosInstance from '../lib/axios.js';
 
-const useBlogStore = create((set) => ({
+const useBlogStore = create((set, get) => ({
   blogs: [],
   isLoading: false,
   error: null,
   selectedBlog: null,
+  likedBlogs: new Set(),
 
-  // Fetch all blogs
   fetchBlogs: async () => {
     set({ isLoading: true, error: null });
     try {
@@ -21,7 +21,6 @@ const useBlogStore = create((set) => ({
     }
   },
 
-  // Fetch specific blog by ID
   setSelectedBlog: async (id) => {
     set({ isLoading: true, selectedBlog: null });
     try {
@@ -35,20 +34,37 @@ const useBlogStore = create((set) => ({
     }
   },
 
-  // Like blog by ID
-  incrementLike: async (id) => {
+  toggleLike: async (id) => {
+    const { likedBlogs } = get();
+    const isLiked = likedBlogs.has(id);
+
     try {
-      const response = await axiosInstance.post(`/experience/like/${id}`);
+      const endpoint = isLiked ? `/experience/unlike/${id}` : `/experience/like/${id}`;
+      const response = await axiosInstance.post(endpoint);
       const updatedExperience = response.data.experience;
-      set((state) => ({
-        blogs: state.blogs.map((blog) =>
-          blog._id === id
-            ? { ...blog, likesCount: updatedExperience.likesCount }
-            : blog
-        ),
-      }));
+
+      set((state) => {
+        const newLikedBlogs = new Set(state.likedBlogs);
+        if (isLiked) {
+          newLikedBlogs.delete(id);
+        } else {
+          newLikedBlogs.add(id);
+        }
+
+        return {
+          blogs: state.blogs.map((blog) =>
+            blog._id === id ? { ...blog, likesCount: updatedExperience.likesCount } : blog
+          ),
+          likedBlogs: newLikedBlogs,
+          selectedBlog:
+            state.selectedBlog?._id === id
+              ? { ...state.selectedBlog, likesCount: updatedExperience.likesCount }
+              : state.selectedBlog,
+        };
+      });
     } catch (error) {
-      console.error('Failed to like blog:', error);
+      console.error(`Failed to ${isLiked ? 'unlike' : 'like'} blog:`, error);
+      throw error;
     }
   },
 }));

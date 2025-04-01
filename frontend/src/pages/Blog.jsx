@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+// components/Blog.js
+import React, { useEffect, useState } from 'react';
 import useBlogStore from '../store/blogStore';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
+import { setAuthToken } from '../lib/axios';
 import Heart from '../Icon/Heart';
 
 const Blog = () => {
@@ -11,19 +14,39 @@ const Blog = () => {
     fetchBlogs,
     selectedBlog,
     setSelectedBlog,
-    incrementLike,
+    toggleLike,
+    likedBlogs,
   } = useBlogStore();
+  const [likeError, setLikeError] = useState(null);
+  const { getToken, isSignedIn } = useAuth();
 
   useEffect(() => {
-    fetchBlogs();
-  }, [fetchBlogs]);
+    const initializeAuth = async () => {
+      if (isSignedIn) {
+        const token = await getToken();
+        setAuthToken(token);
+      }
+      fetchBlogs();
+    };
+    initializeAuth();
+  }, [fetchBlogs, isSignedIn, getToken]);
 
   const handleReadMore = (id) => {
     setSelectedBlog(id);
   };
 
-  const handleLike = (id) => {
-    incrementLike(id);
+  const handleLikeToggle = async (id) => {
+    if (!isSignedIn) {
+      setLikeError('Please sign in to like posts');
+      return;
+    }
+    setLikeError(null);
+    try {
+      await toggleLike(id);
+    } catch (error) {
+      setLikeError(error.message);
+      console.error('Like toggle failed:', error);
+    }
   };
 
   return (
@@ -38,6 +61,16 @@ const Blog = () => {
           <p className='text-center text-red-500'>{error}</p>
         ) : (
           <>
+            {likeError && (
+              <p className='text-center text-red-500 mb-4'>
+                {likeError}
+                {likeError.includes('Unauthorized') && (
+                  <Link to='/sign-in' className='underline ml-2'>
+                    Sign In
+                  </Link>
+                )}
+              </p>
+            )}
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
               {blogs.map((item) => (
                 <div
@@ -45,9 +78,7 @@ const Blog = () => {
                   className='rounded-2xl shadow-md overflow-hidden transition-transform hover:scale-105 duration-300'
                 >
                   <img
-                    src={
-                      item.images[0] || 'https://via.placeholder.com/400x300'
-                    }
+                    src={item.images[0] || 'https://via.placeholder.com/400x300'}
                     alt={item.title}
                     className='w-full h-56 object-cover'
                   />
@@ -62,11 +93,15 @@ const Blog = () => {
                     </p>
                     <div className='flex justify-between items-center mt-4'>
                       <button
-                        className='btn btn-primary rounded-full'
-                        onClick={() => handleLike(item._id)}
+                        className={`btn btn-primary rounded-full ${
+                          likedBlogs.has(item._id)
+                            ? 'bg-red-500 hover:bg-red-600'
+                            : 'bg-blue-500 hover:bg-blue-600'
+                        }`}
+                        onClick={() => handleLikeToggle(item._id)}
                       >
                         <Heart />
-                        Like
+                        {likedBlogs.has(item._id) ? 'Unlike' : 'Like'}
                       </button>
                       <span>
                         <i className='fas fa-thumbs-up mr-1'></i>
@@ -84,15 +119,10 @@ const Blog = () => {
               ))}
             </div>
 
-            {/* Always show the "Post a Blog" button */}
-            <Link
-              to='/create-blog'
-              className='btn btn-primary mt-4 w-full text-2xl'
-            >
+            <Link to='/create-blog' className='btn btn-primary mt-4 w-full text-2xl'>
               Post a Blog
             </Link>
 
-            {/* Display selected blog details in a Modal */}
             {selectedBlog && (
               <div className='fixed top-0 left-0 w-full h-full bg-base-100 bg-opacity-50 flex justify-center items-center'>
                 <div className='rounded-xl shadow-lg overflow-hidden max-w-2xl w-full'>
@@ -106,24 +136,32 @@ const Blog = () => {
                     </p>
                     <img
                       src={
-                        selectedBlog.images[0] ||
-                        'https://via.placeholder.com/800x400'
+                        selectedBlog.images[0] || 'https://via.placeholder.com/800x400'
                       }
                       alt={selectedBlog.title}
                       className='w-full h-64 object-cover rounded-md mb-6'
                     />
-                    <div className='leading-relaxed'>
-                      {selectedBlog.content}
-                    </div>
+                    <div className='leading-relaxed'>{selectedBlog.content}</div>
                     <div className='flex justify-between items-center mt-8'>
                       <div>
+                        <button
+                          className={`btn btn-primary rounded-full mr-4 ${
+                            likedBlogs.has(selectedBlog._id)
+                              ? 'bg-red-500 hover:bg-red-600'
+                              : 'bg-blue-500 hover:bg-blue-600'
+                          }`}
+                          onClick={() => handleLikeToggle(selectedBlog._id)}
+                        >
+                          <Heart />
+                          {likedBlogs.has(selectedBlog._id) ? 'Unlike' : 'Like'}
+                        </button>
                         <span>
                           <i className='fas fa-thumbs-up mr-1'></i>
                           {selectedBlog.likesCount} Likes
                         </span>
                       </div>
                       <button
-                        className='bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition-colors duration-200'
+                        className='bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded-full'
                         onClick={() => setSelectedBlog(null)}
                       >
                         Close

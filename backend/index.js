@@ -9,7 +9,7 @@ import destinationRoute from './routes/destination.route.js';
 import premiumRoute from './routes/premium.route.js';
 import './cronJobs.js'; // Import the cron job file to activate it
 import GuideRoute from './routes/guide.route.js';
-import ExperienceRoute from './routes/addExperience.route.js';
+import ExperienceRoute from './routes/experience.js'
 import cors from 'cors';
 dotenv.config();
 
@@ -19,12 +19,12 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: 'http://localhost:5173', // Frontend origin
+  credentials: true, // Allow credentials (cookies, Authorization headers)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+}));
 app.use('/api/auth', userRoute);
 app.use('/api/premium', premiumRoute);
 app.use('/api/destination', destinationRoute);

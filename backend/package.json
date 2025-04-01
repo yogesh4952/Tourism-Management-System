@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.1.6",
     "@sentry/node": "^8.54.0",
     "@sentry/profiling-node": "^8.54.0",
     "bcrypt": "^5.1.1",

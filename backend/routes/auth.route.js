@@ -8,17 +8,17 @@ import {
   sendVerifyOtp,
   verifyOtp,
 } from '../controllers/auth.controller.js';
-import { protectRoute } from '../middlewares/auth.middleware.js';
+import { authMiddleware } from '../middlewares/auth.js';
 
 const route = express.Router();
 
 route.post('/registerUser', registerUser);
 
 route.post('/login', loginUser);
-route.post('/send-verify-otp', protectRoute, sendVerifyOtp);
-route.post('/verify-otp', protectRoute, verifyOtp);
-route.post('/send-reset-otp', protectRoute, sendResetOtp);
-route.post('/reset-password', protectRoute, resetPassword);
-route.post('/logout', protectRoute, logOut);
+route.post('/send-verify-otp', authMiddleware, sendVerifyOtp);
+route.post('/verify-otp', authMiddleware, verifyOtp);
+route.post('/send-reset-otp', authMiddleware, sendResetOtp);
+route.post('/reset-password', authMiddleware, resetPassword);
+route.post('/logout', authMiddleware, logOut);
 
 export default route;

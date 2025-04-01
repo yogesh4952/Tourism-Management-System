@@ -1,6 +1,5 @@
 import express from 'express';
 
-import { protectRoute } from '../middlewares/auth.middleware.js';
 import {
   deleteAll,
   deleteDestination,
@@ -8,13 +7,14 @@ import {
   getDestinationByDistrict,
 } from '../controllers/destination.controller.js';
 import { createDestination } from '../controllers/destination.controller.js';
+import { authMiddleware } from '../middlewares/auth.js';
 
 const route = express.Router();
 
-route.get('/getAllDestinations', protectRoute, getAllDestinations);
-route.post('/create-destination', protectRoute, createDestination);
-route.get('/getDestinationByDistrict', protectRoute, getDestinationByDistrict);
-route.delete('/:id', protectRoute, deleteDestination);
+route.get('/getAllDestinations', authMiddleware, getAllDestinations);
+route.post('/create-destination', authMiddleware, createDestination);
+route.get('/getDestinationByDistrict', authMiddleware, getDestinationByDistrict);
+route.delete('/:id', authMiddleware, deleteDestination);
 
 route.delete('/delete-all', deleteAll);
 
